@@ -20,8 +20,8 @@ html { overflow-y: scroll; }
 
 body { 
   background: #eee;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 62.5%;
+  font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 75%;
   line-height: 1;
   color: #585858;
   padding: 22px 10px;
@@ -68,7 +68,6 @@ h1 {
 /** page structure **/
 #wrapper {
   display: block;
-  width: 1000px;
   background: #fff;
   margin: 0 auto;
   padding: 10px 17px;
@@ -88,18 +87,42 @@ h1 {
 #keywords thead tr th { 
   font-weight: bold;
   vertical-align: middle;
-  padding: 12px 20px 12px 20px;
+  padding: 12px 22px 12px 22px;
 }
 
-#keywords tbody tr { 
+
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  color: darkred;
+  background: #acc8dd;
+  border-bottom-color: green;
+}
+
+#keywords thead tr th.headerSortUp span {
+  background: url('img/uparrow.png') right center no-repeat;
+  padding-right: 20px;
+
+}
+#keywords thead tr th.headerSortDown span {
+  background-image: url('img/downarrow.png')  right center no-repeat;
+  padding-right: 20px;
+
+}
+
+#keywords tbody tr.even { 
   color: #555;
+  background: #fff;
+}
+
+#keywords tbody tr.odd {
+  color: #555;
+  background: rgb(250, 250, 250);
 }
 
 #keywords tbody tr td {
-  border: 1px dotted lightskyblue;
   text-align: center;
   padding: 15px 10px;
 }
+
 #keywords tbody tr td.lalign {
   font-weight: bold;
   text-align: left;

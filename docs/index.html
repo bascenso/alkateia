@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang='pt'>
 
-<head>
+<!-- Development tags REMOVE FOR PROD!!!-->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
+<head>
      <meta charset='utf-8'>
      <link rel='stylesheet' href='styles.css'>
 
@@ -14,7 +15,13 @@
 
 <body>
     <div id='wrapper'>
-        <H1>Tabela de resultados do clã:</H1>
+        <h1>Tabela de resultados do clã:</h1>
+
+        <div>Clica sobre a coluna para ordenar. Download da tabela: 
+                <a href='http://www.google.com?q=xls'>XLS</a> | 
+                <a href='http://www.google.com?q=csv'>CSV</a> | 
+                <a href='http://www.google.com?q=json'>JSON</a>
+            </div>
 
         <!-- Table will start here -->
 
@@ -26,29 +33,29 @@
 <th><span>Batalhas Colecta</span></th>
 <th><span>Cartas ganhas</span></th>
 <th><span>Batalhas finais</span></th>
-<th><span>Vit�rias</span></th>
+<th><span>Vitórias</span></th>
 <th><span>Falhas em colecta</span></th>
 <th><span>Falhas em batalha</span></th>
-<th><span>% de vit�rias</span></th>
-<th><span>N�vel</span></th>
-<th><span>Trof�us</span></th>
-<th><span>M�x trof�us</span></th>
-<th><span>Vit�rias totais</span></th>
+<th><span>% de vitórias</span></th>
+<th><span>Nível</span></th>
+<th><span>Troféus</span></th>
+<th><span>Máx troféus</span></th>
+<th><span>Vitórias totais</span></th>
 <th><span>Derrotas totais</span></th>
 <th><span>Batalhas totais</span></th>
-<th><span>Vit�rias 3 coroas</span></th>
+<th><span>Vitórias 3 coroas</span></th>
 <th><span>Cartas em desafios</span></th>
-<th><span>M�x vit�rias em desafios</span></th>
+<th><span>Máx vitórias em desafios</span></th>
 <th><span>Cartas em torneios</span></th>
 <th><span>Batalhas em torneios</span></th>
-<th><span>N�vel no cl�</span></th>
-<th><span>Doa��es</span></th>
-<th><span>Doa��es recebidas</span></th>
-<th><span>Total de doa��es</span></th>
-<th><span>Vit�rias em guerras</span></th>
+<th><span>Nível no clã</span></th>
+<th><span>Doações</span></th>
+<th><span>Doações recebidas</span></th>
+<th><span>Total de doações</span></th>
+<th><span>Vitórias em guerras</span></th>
 <th><span>Cartas colectadas</span></th>
 <th><span>Arena</span></th>
-<th><span>Contributo para o cl�</span></th>
+<th><span>Contributo para o clã</span></th>
 </tr>
 </thead>
 <tbody>
@@ -113,7 +120,7 @@
 <td>190</td>
 </tr>
 <tr>
-<td class='lalign'><U+2606> Di<U+2661>g<U+2661></td>
+<td class='lalign'>☆ Di♡g♡</td>
 <td>19</td>
 <td>57</td>
 <td>24080</td>
@@ -233,7 +240,7 @@
 <td>160</td>
 </tr>
 <tr>
-<td class='lalign'>Fab�ola</td>
+<td class='lalign'>Fabíola</td>
 <td>18</td>
 <td>54</td>
 <td>21455</td>
@@ -563,7 +570,7 @@
 <td>138</td>
 </tr>
 <tr>
-<td class='lalign'>Tio Jo�o</td>
+<td class='lalign'>Tio João</td>
 <td>18</td>
 <td>54</td>
 <td>21571</td>
@@ -1559,9 +1566,9 @@
 
     </div>
 
-    <script src='jquery.min.js'></script>
-    <script src='jquery.tablesorter.min.js'></script>
-    <script src='sort.js'></script>
+    <script src='js/jquery.min.js'></script>
+    <script src='js/jquery.tablesorter.min.js'></script>
+    <script src='js/sort.js'></script>
 </body>
 
 </html>
