@@ -18,8 +18,8 @@ writeHTMLFile <- function(stats, template, output) {
     }
     
     # Read the template
-    con <- file(template, open = "r")
-    htmlCode <- readLines(con, encoding="UTF-8")
+    con <- file(template, open = "r") # Don't use enconding here
+    htmlCode <- readLines(con, encoding = "UTF-8")
     close(con)
     
     # Generate new HTML replacing the tag with the table
@@ -51,7 +51,7 @@ buildHTMLTable <- function (statsTable) {
     
     for(i in 1:length(names(statsTable))) {
         iName = match(names(statsTable)[i], prettyNames)
-        prettyName <- ifelse(is.na(iName), names(statsTable)[i], tNames[iName, 2])
+        prettyName <- ifelse(is.na(iName), names(statsTable)[i], prettyNames[iName, 2])
         
         colName <- paste("<th><span>", prettyName, "</span></th>", sep = "")
         innerHTML <- paste(innerHTML, colName, sep = "\n")
