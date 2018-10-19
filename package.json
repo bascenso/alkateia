@@ -1,0 +1,27 @@
+{
+  "name": "alkateia",
+  "version": "1.0.0",
+  "description": "Alkateia PT Clan page and data",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bascenso/alkateia.git"
+  },
+  "author": "Bruno Ascenso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bascenso/alkateia/issues"
+  },
+  "homepage": "https://github.com/bascenso/alkateia#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.14.4"
+  }
+}
