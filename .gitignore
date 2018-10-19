@@ -63,3 +63,5 @@ typings/
 # R environment
 .RData
 .Rhistory
+.Rproj.user
+alkateia.Rproj

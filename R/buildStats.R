@@ -6,20 +6,23 @@ library(jsonlite, quietly = T)
 library(xlsx, quietly = T)
 
 source("defs.R")
-source("clans.R")
-source("players.R")
-source("HTMLTable.R")
+source("clans.R", encoding="utf-8")
+source("players.R", encoding="utf-8")
+source("HTMLTable.R", encoding="utf-8")
 
 
 ## ================ Get my clan member list
+message("Loading clan member list...")
 membersDF <- getClanMembers(myclantag, token)
 
 
 ## ================ Get my clan warlog and append to file
+message("Loading war log...")
 warlogDF <- getClanWarlog(myclantag, token, warlogFile)
 
 
 ## ================ Get detailed member info
+message("Loading detailed member info...")
 detailedMembersDF <- getClanMemberDetails(myclantag, token)
 
 
@@ -27,6 +30,8 @@ detailedMembersDF <- getClanMemberDetails(myclantag, token)
 ## ===========================================================================================================
 ## Build war stats
 ##
+
+message("Building stats...")
 
 # Get the battle totals
 s <- split(warlogDF, warlogDF$tag)
