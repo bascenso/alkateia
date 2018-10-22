@@ -15,23 +15,41 @@
 
 <body>
     <div id='wrapper'>
-        <h1>Estatísticas de guerra e individuais</h1>
+        <h1>Estatísticas de guerra</h1>
 
-        <div>Clica sobre a coluna para ordenar. Download da tabela: 
+        <div>Clica sobre uma coluna para ordenar. Download da tabela: 
                 <a href='http://www.google.com?q=xls'>XLS</a> | 
                 <a href='http://www.google.com?q=csv'>CSV</a> | 
                 <a href='http://www.google.com?q=json'>JSON</a>
-            </div>
+        </div>
 
         <!-- Table will start here -->
 
-        <CLAN_PLAYERS_TABLE>
+        <CLAN_WAR_STATS_TABLE>
     
         <!-- Table will end here -->
 
     </div>
 
-    <script src='js/jquery.min.js'></script>
+    <br><br>
+
+    <div id='wrapper'>
+            <h1>Estatísticas individuais</h1>
+    
+            <div>Clica sobre uma coluna para ordenar. Download da tabela: 
+                    <a href='http://www.google.com?q=xls'>XLS</a> | 
+                    <a href='http://www.google.com?q=csv'>CSV</a> | 
+                    <a href='http://www.google.com?q=json'>JSON</a>
+            </div>
+    
+            <!-- Table will start here -->
+    
+            <CLAN_MEMBERS_STATS_TABLE>
+        
+            <!-- Table will end here -->
+    
+        </div>
+        <script src='js/jquery.min.js'></script>
     <script src='js/jquery.tablesorter.min.js'></script>
     <script src='js/sort.js'></script>
 </body>

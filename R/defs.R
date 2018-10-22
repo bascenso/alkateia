@@ -3,12 +3,15 @@
 ## eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA
 ## Allowed IP: 95.92.69.117
 ##
+## eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjI4Njc3ODY1LTYyOGUtNDlmYy1hM2ZlLTI4MGY0ODNiNDc1YiIsImlhdCI6MTU0MDIyNDUzNSwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxODguMzcuMTQ4LjEyIl0sInR5cGUiOiJjbGllbnQifV19.ODcsrHxaptKU9fEAiEYluslCT0oV5n2Zc0zc0mYwvPm1misjr7tPQAEnVoSRFn8yuE7abCMht77NYE3cd7bykg
+## Allowed IP: 188.37.148.12
+##
 ## curl -X GET --header 'Accept: application/json' --header "authorization: Bearer <API token>" 'https://api.clashroyale.com/v1/tournaments'
 ## curl -X GET --header 'Accept: application/json' --header "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA" 'https://api.clashroyale.com/v1/players/%232UVYQPG2J'
 ## 
 
-
-token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjI4Njc3ODY1LTYyOGUtNDlmYy1hM2ZlLTI4MGY0ODNiNDc1YiIsImlhdCI6MTU0MDIyNDUzNSwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxODguMzcuMTQ4LjEyIl0sInR5cGUiOiJjbGllbnQifV19.ODcsrHxaptKU9fEAiEYluslCT0oV5n2Zc0zc0mYwvPm1misjr7tPQAEnVoSRFn8yuE7abCMht77NYE3cd7bykg"
+##token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
 
 myplayertag = "/%232UVYQPG2J"
 myclantag = "/%23PG8VC9V"
@@ -18,6 +21,7 @@ tplayertag = "/%23992V0CV2U"
 ## Files
 warlogFile = "data/warlog.RDS"
 clanStatsFile = "data/clanstats.RDS"
+playerFile = "data/players.RDS"
 
 templateFile <- "data/template.html"
 outputFile <- "../docs/index.html"
@@ -25,14 +29,19 @@ outputFile <- "../docs/index.html"
 statsJSONfile <- "C:/Data/GDrive/98.CR/alkateia.json"
 statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
 
-# Tag in template HTML file to replace with the table
-customTableTag <- "<CLAN_PLAYERS_TABLE>"
+
+
+# Tags in template HTML file to replace with the tables
+clanWarTableTag <- "<CLAN_WAR_STATS_TABLE>"
+playerTableTag = "<CLAN_MEMBERS_STATS_TABLE>"
+
+
 
 
 ## Pretty names for clan stats columns
 clanCols = list(
     c("tag", "tag"),
-    c("name.x", "Nome"),
+    c("name", "Nome"),
     c("currentMember", "Membro?"),
     c("warsEntered", "Guerras"),
     c("collectionDayBattlesPlayed", "Batalhas Colecta"),

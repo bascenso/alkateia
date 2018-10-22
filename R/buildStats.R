@@ -86,10 +86,6 @@ for (i in 1:nrow(statsDF)) {
 # Sort and reorder columns
 statsDF <- statsDF[c(1, 6, 11, 7, 5, 2:4, 9, 8, 10)]
 
-## Merge all player stats (war and individual), compute war score and save to JSON and XLXS files
-allStatsDF <- merge(statsDF, detailedMembersDF, by.x = "tag", by.y = "tag", all.x = TRUE)
-allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
-
 ## ================ Compute PLAYER SCORE
 ## Score / points added:
 ## - 500 cards earned = 1 point
@@ -105,30 +101,111 @@ allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 ## - War miss: (misses / 4) ^ 2
 ##                      0, 0.1, 0.3, 0.6, 1, 1.6
 
-allStatsDF$WARSCORE <- rep (0L, nrow(allStatsDF))
 
-totalWars <- max(allStatsDF$warsEntered) # Not the best solution; need to deal with this later
+statsDF$WARSCORE <- rep (0L, nrow(statsDF))
 
-for (i in 1:nrow(allStatsDF)) {
-    allStatsDF$WARSCORE[i] <- round(allStatsDF$cardsEarned[i] / 500 
-                              + allStatsDF$wins[i] * 5 
-                              + allStatsDF$warDayWins[i] / 2
-                              + allStatsDF$clanCardsCollected[i] / 2000
-                              - 10 * allStatsDF$finalBattleMisses[i] + 3 ^ allStatsDF$finalBattleMisses[i] - 1
-                              - (1 + allStatsDF$collectionBattleMisses[i] / 2) ^ 2 - 1
-                              - ((totalWars - allStatsDF$warsEntered[i]) / 4) ^ 2
+totalWars <- max(statsDF$warsEntered) # Not the best solution; need to deal with this later
+
+for (i in 1:nrow(statsDF)) {
+    
+    # Check if it's an existing member
+    if (nrow(detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]) == 0) next
+    
+    memberWarDayWins = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$warDayWins
+    memberClanCardsCollected = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$clanCardsCollected
+    
+    statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 500 
+                              + statsDF$wins[i] * 5 
+                              + memberWarDayWins / 2
+                              + memberClanCardsCollected / 2000
+                              - 10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1
+                              - (1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1
+                              - ((totalWars - statsDF$warsEntered[i]) / 4) ^ 2
                               )
 }
 
+
+
+## Merge all player stats (war and individual), and save to XLXS file
+allStatsDF <- merge(statsDF, detailedMembersDF, by.x = "tag", by.y = "tag", all.x = TRUE)
+allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 
-
-
-#write(toJSON(allStatsDF, pretty = T), statsJSONfile)
 write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
 write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
 
-writeHTMLFile(allStatsDF[(allStatsDF$currentMember == "Yes"), !(names(allStatsDF) %in% c("tag", "currentMember"))], templateFile, outputFile)
+
+## Build HTML table with war stats
+writeHTMLFile(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], templateFile, outputFile)
+
+
+## ===========================================================================================================
+## Update player join dates
+##
+if (file.exists(playerFile)) {
+    playerInfo <- readRDS(playerFile)
+    
+} else {
+    detailedMembersDF$joined <- rep(Sys.Date(), nrow(detailedMembersDF))
+}
+
+saveRDS(playerInfo, playerFile)
+
+
+playerInfo[playerInfo$name == "bascenso", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Bruno Lopez", ]$joined <- as.Date("2018-06-03")
+playerInfo[playerInfo$name == "carmen", ]$joined <- as.Date("2018-07-31")
+playerInfo[playerInfo$name == "castelhano", ]$joined <- as.Date("2018-07-21")
+playerInfo[playerInfo$name == "bascenso", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "danger", ]$joined <- as.Date("2018-10-11")
+playerInfo[playerInfo$tag == "#2JU82PCJ", ]$joined <- as.Date("2018-04-28")
+playerInfo[playerInfo$name == "Doomesticador", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "EBAERV_", ]$joined <- as.Date("2018-10-03")
+playerInfo[playerInfo$name == "Fabíola", ]$joined <- as.Date("2018-04-24")
+playerInfo[playerInfo$name == "faneca", ]$joined <- as.Date("2018-06-29")
+playerInfo[playerInfo$name == "fglopes", ]$joined <- as.Date("2018-09-13")
+playerInfo[playerInfo$name == "filipe", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Goblyn", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "hugo", ]$joined <- as.Date("2018-10-17")
+playerInfo[playerInfo$name == "Inferno", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "John Rambo", ]$joined <- as.Date("2018-07-03")
+playerInfo[playerInfo$name == "Jonix21", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "King Bonixe", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "KryptoNnN", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "LCINORC", ]$joined <- as.Date("2018-10-17")
+playerInfo[playerInfo$name == "leal", ]$joined <- as.Date("2018-06-01")
+playerInfo[playerInfo$name == "Madnasty", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Manu", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Madnasty", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Marcelo", ]$joined <- as.Date("2018-10-17")
+playerInfo[playerInfo$name == "MASTER PT", ]$joined <- as.Date("2018-09-17")
+playerInfo[playerInfo$name == "Madnasty", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Matilde Pires", ]$joined <- as.Date("2018-10-17")
+playerInfo[playerInfo$name == "metamox", ]$joined <- as.Date("2018-06-23")
+playerInfo[playerInfo$name == "mounir", ]$joined <- as.Date("2018-10-17")
+playerInfo[playerInfo$name == "Pikaya", ]$joined <- as.Date("2018-09-29")
+playerInfo[playerInfo$name == "pjp", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "qzt", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Ricky", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Robb Stark", ]$joined <- as.Date("2018-06-03")
+playerInfo[playerInfo$name == "Savler", ]$joined <- as.Date("2018-10-09")
+playerInfo[playerInfo$name == "Sergas", ]$joined <- as.Date("2018-09-27")
+playerInfo[playerInfo$name == "serial killer", ]$joined <- as.Date("2018-10-15")
+playerInfo[playerInfo$name == "snowkids", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Sra. Clash", ]$joined <- as.Date("2018-06-03")
+playerInfo[playerInfo$name == "supercell", ]$joined <- as.Date("2018-04-30")
+playerInfo[playerInfo$name == "TheKingJK", ]$joined <- as.Date("2018-09-21")
+playerInfo[playerInfo$name == "thunder", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Tio João", ]$joined <- as.Date("2018-05-10")
+playerInfo[playerInfo$name == "topdosl33ts", ]$joined <- as.Date("2018-08-02")
+playerInfo[playerInfo$name == "unb", ]$joined <- as.Date("2018-07-31")
+playerInfo[playerInfo$name == "Madnasty", ]$joined <- as.Date("2018-03-25")
+playerInfo[playerInfo$name == "Welton", ]$joined <- as.Date("2018-09-09")
+playerInfo[playerInfo$name == "Wut", ]$joined <- as.Date("2018-06-24")
+playerInfo[playerInfo$name == "YOSHINZ", ]$joined <- as.Date("2018-10-07")
+playerInfo[playerInfo$name == "zau", ]$joined <- as.Date("2018-07-21")
+playerInfo[playerInfo$name == "ZezinhoPT", ]$joined <- as.Date("2018-09-19")
+
 
 ## ===========================================================================================================
 ## Build clan stats and append to file

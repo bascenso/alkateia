@@ -23,7 +23,7 @@ writeHTMLFile <- function(stats, template, output) {
     close(con)
     
     # Generate new HTML replacing the tag with the table
-    htmlNewCode <- sub(customTableTag, buildHTMLTable(stats), htmlCode)
+    htmlNewCode <- sub(clanWarTableTag, buildHTMLTable(stats), htmlCode)
     
     # Write output file
     con <- file(output, open = "w")

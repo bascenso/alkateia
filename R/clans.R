@@ -120,17 +120,18 @@ getClanMemberDetails <- function(clanTag, token) {
     
     clanReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
     
-    if (clanReq$status_code != 200) {
-        stop(paste("Server returned error:", clanReq$status_code))
     } else {
         clanInfo <- content(clanReq)
  
         memberInfoDF <- data.frame()
         numMembers <- length(clanInfo$memberList)
+        message(paste("Loading", numMembers, "members..."))
         
         for (i in 1:numMembers) {
             iMember <- getPlayerInfo(sub("#", "/%23", clanInfo$memberList[[i]]$tag), token)
 
+            cat(i, " ")
+            
             memberInfoDF <- rbind(memberInfoDF, data.frame(
                 tag = iMember$tag,
                 name = iMember$name,
