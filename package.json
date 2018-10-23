@@ -21,7 +21,7 @@
   "homepage": "https://github.com/bascenso/alkateia#readme",
   "dependencies": {
     "bootstrap": "^4.1.3",
-    "jquery": "^1.9.1",
+    "jquery": "^3.3.1",
     "popper.js": "^1.14.4"
   }
 }
