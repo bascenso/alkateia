@@ -6,15 +6,21 @@
 
 ## ===========================================================================================================
 ## Function writeHTMLFile(stats, template, output) - writes the HTML file replacing the tag with the table
-##      statsTable - DF with the data
+##      tableTag - list of table tags to replace in the template
+##      statsTable - lsit of DFs with the data (must have the same order as the tags)
 ##      templateFile - HTML template to replace the table code
 ##      outputFile - file to output the result (template + table data)
 
-writeHTMLFile <- function(stats, template, output) {
+writeHTMLFile <- function(tableTag, stats, template, output) {
     
     if (!file.exists(template)) {
         warning(paste(template, ":: Template file not found."))
         return("");
+    }
+    
+    if (length(tableTag) == 0 || length(stats) == 0 || length(stats) != length(tableTag)) {
+        warning("writeHTML file not possible: arguments of 0 or different length")
+        return("")
     }
     
     # Read the template
@@ -22,12 +28,14 @@ writeHTMLFile <- function(stats, template, output) {
     htmlCode <- readLines(con, encoding = "UTF-8")
     close(con)
     
-    # Generate new HTML replacing the tag with the table
-    htmlNewCode <- sub(clanWarTableTag, buildHTMLTable(stats), htmlCode)
+    # Generate new HTML replacing the tags with the table data
+    for (i in 1:length(tableTag)) {
+        htmlCode <- sub(tableTag[[i]], buildHTMLTable(stats[[i]]), htmlCode)
+    }
     
     # Write output file
     con <- file(output, open = "w")
-    writeLines(htmlNewCode, con, useBytes = T)
+    writeLines(htmlCode, con, useBytes = T)
     close(con)
 }
 
@@ -41,12 +49,10 @@ buildHTMLTable <- function (statsTable) {
     
     prettyNames <- t(data.frame(clanCols))
     
-    
-    ## INITIAL TAG
-    innerHTML <- "<table id='keywords' cellspacing='0' cellpadding='0'>"
-    
+    ## TAG <table></table> must be in the template
+
     ## TABLE HEAD
-    innerHTML <- paste(innerHTML, "<thead>", sep = "\n")
+    innerHTML <- "<thead>"
     innerHTML <- paste(innerHTML, "<tr>", sep = "\n")
     
     for(i in 1:length(names(statsTable))) {
@@ -81,9 +87,6 @@ buildHTMLTable <- function (statsTable) {
     }
     
     innerHTML <- paste(innerHTML, "</tbody>", sep = "\n")
-    
-    ## CLOSING TAG
-    innerHTML <- paste(innerHTML, "</table>", sep = "\n")
     
     innerHTML
 }

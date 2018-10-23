@@ -68,62 +68,63 @@ h1 {
 #wrapper {
   display: block;
   background: #fff;
-  width: 1200px;
+  width: 1500px;
   margin: 0 auto;
   padding: 10px 17px;
 }
 
-#keywords {
+#warStats, #playerStats {
   margin: 0 auto;
   font-size: 1.2em;
   margin-bottom: 15px;
 }
 
-#keywords thead {
+#warStats thead, #playerStats thead {
   cursor: pointer;
   background: #c9dff0;
 }
 
-#keywords thead tr th { 
+#warStats thead tr th, #playerStats thead tr th { 
   font-weight: bold;
   vertical-align: middle;
   padding: 12px 22px 12px 22px;
 }
 
 
-#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+#warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
+#playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown {
   color: darkred;
   background: #acc8dd;
   border-bottom-color: green;
 }
 
-#keywords thead tr th.headerSortUp span {
+#warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span {
   background: url('img/uparrow.png') right center no-repeat;
   padding-right: 20px;
 
 }
-#keywords thead tr th.headerSortDown span {
+#warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span {
   background-image: url('img/downarrow.png')  right center no-repeat;
   padding-right: 20px;
 
 }
 
-#keywords tbody tr.even { 
+#warStats tbody tr.even, #playerStats tbody tr.even { 
   color: #555;
   background: #fff;
 }
 
-#keywords tbody tr.odd {
+#warStats tbody tr.odd, #playerStats tbody tr.odd {
   color: #555;
   background: rgb(250, 250, 250);
 }
 
-#keywords tbody tr td {
+#warStats tbody tr td, #playerStats tbody tr td {
   text-align: center;
   padding: 15px 10px;
 }
 
-#keywords tbody tr td.lalign {
+#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign {
   font-weight: bold;
   text-align: left;
 }
