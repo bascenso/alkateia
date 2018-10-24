@@ -1,0 +1,185 @@
+## ===========================================================================================================
+## Function logClanStats(detailedMembersDF, clanStatsfile)
+##      detailedMembersDF - data frame with all the members individual stats
+##      clanStatsFile - file path to load/save the log
+##
+## Builds the clan stats and logs to the file defined in the global variable 'clanStatsFile'
+
+logClanStats <- function(detailedMembersDF, clanStatsFile) {
+
+    if (file.exists(clanStatsFile)) {
+        clanStatsDF <- readRDS(clanStatsFile)
+
+    } else {
+        clanStatsDF <- data.frame()
+    }
+
+    ## Two entries must be at least 12 hours appart and on different days
+    mostRecent <- clanStatsDF$timestamp[nrow(clanStatsDF)]
+
+    if (julian(Sys.time(), mostRecent) > 0.5 && wday(mostRecent) != wday(Sys.time())) {
+
+        clanStatsDF <- rbind(clanStatsDF, data.frame(
+            timestamp = Sys.time(),
+            nMembers = nrow(detailedMembersDF),
+            roleColeader = nrow(detailedMembersDF[detailedMembersDF$role == 'coLeader', ]),
+            roleElder = nrow(detailedMembersDF[detailedMembersDF$role == 'elder', ]),
+            roleMember = nrow(detailedMembersDF[detailedMembersDF$role == 'member', ]),
+            avgLevel = round(mean(detailedMembersDF$expLevel), 2),
+            avgTrophies = round(mean(detailedMembersDF$trophies)),
+            avgBestTrophies = round(mean(detailedMembersDF$bestTrophies)),
+            avgWins = round(mean(detailedMembersDF$totalWins)),
+            avgBattleCount = round(mean(detailedMembersDF$battleCount)),
+            avgChallengeMaxWins = round(mean(detailedMembersDF$challengeMaxWins), 1),
+            avgDonations = round(mean(detailedMembersDF$totalDonations)),
+            avgWarDayWins = round(mean(detailedMembersDF$warDayWins), 1),
+            avgCardsCollected = round(mean(detailedMembersDF$clanCardsCollected))
+        ))
+
+        saveRDS(clanStatsDF, clanStatsFile)
+
+    }
+
+    clanStatsDF
+}
+
+## ===========================================================================================================
+## Function buildWarStats(warlogDF, membersDF, detailedMembersDF, nwars = "all")
+##      warlogDF - data frame with the log of all war participation
+##      membersDF - data frame with all the members of the clan
+##      detailedMembersDF - data frame with all the members individual stats. needed to compute warscore
+##      nwars - build the stats with this many last wars; Default is all wars available
+##
+
+buildWarStats <- function(warlogDF, membersDF, detailedMembersDF, nwars = "all") {
+
+    warCount <- length(unique(warlogDF$warId))
+    wars <- warlogDF
+    
+    if (nwars == "all") nwars <- warCount
+    
+    if (nwars <= 0 || nwars > warCount) {
+        warning("Invalid number of wars. Defaulting to 'all'.")
+        nwars <- warCount
+    }
+    
+    if (nwars < warCount) {
+        warDates <- unique(warlogDF$warId)
+        warDates <- warDates[order(unique(warlogDF$warEnd), decreasing = TRUE)]
+        warDates <- warDates[1:nwars]
+        
+        wars <- warlogDF[warlogDF$warId %in% warDates, ]
+        wars$tag <- droplevels(wars$tag)
+    }
+
+    # Get the battle totals per player
+
+    s <- split(wars, wars$tag)
+    statsDF <- data.frame(t(data.frame(lapply(s, function(x) {
+        colSums(x[, c("cardsEarned", "battlesPlayed", "wins", "collectionDayBattlesPlayed")])
+        } ))))
+    
+    # Add tag and name
+    statsDF$tag <- sub("X.", "#", rownames(statsDF))
+    
+    statsDF$name <- rep(NA, nrow(statsDF))
+    
+    for (i in 1:nrow(statsDF)) {
+        player <- as.character(statsDF$tag[i])
+        occ <- match(player, wars$tag)
+        statsDF$name[i] <- as.character(wars$name[occ])
+    }
+    
+    # Add number of participations in wars for each member
+    participations <- data.frame(table(unlist(wars$tag)))
+    statsDF <- merge(statsDF, participations, by.x = "tag", by.y = "Var1", all = TRUE)
+    setnames(statsDF, "Freq", "warsEntered")
+    
+    
+    ## Add current members with no participations
+    for (i in 1:nrow(membersDF)) {
+        if(!any(membersDF$tag[i] == statsDF$tag)) {
+            statsDF <- rbind(statsDF, list(tag = membersDF$tag[i], name = membersDF$name[i], cardsEarned = 0,
+                                           battlesPlayed = 0, wins = 0, collectionDayBattlesPlayed = 0, warsEntered = 0))
+        }
+    }
+    
+    ## Add final battle misses and collection battle misses
+    statsDF$finalBattleMisses <- rep(0L, nrow(statsDF))
+    
+        ## Any entry with 0 battles played counts as a miss (does not capture players with 2 battles that played only 1)
+    for (i in 1:nrow(statsDF)) {
+        statsDF$finalBattleMisses[i] <- nrow(wars[(wars$tag == statsDF$tag[i] & wars$battlesPlayed == 0), ])
+    }
+    
+    statsDF$collectionBattleMisses <- (statsDF$warsEntered * 3) - statsDF$collectionDayBattlesPlayed
+
+    
+    ## Add win percentage
+    statsDF$winRate <- round(statsDF$wins / statsDF$battlesPlayed, 2) * 100
+    
+    ## Add flag for current members
+    statsDF$currentMember <- rep("No", nrow(statsDF))
+    for (i in 1:nrow(statsDF)) {
+        if (statsDF$tag[i] %in% membersDF$tag) 
+            statsDF$currentMember[i] <- "Yes"
+    }
+    
+    # Add player score column 
+    statsDF <- computePlayerScore(statsDF, detailedMembersDF, nwars)
+
+    # Reorder columns and sort by WARSCORE
+    statsDF <- statsDF[c(1, 6, 11, 7, 5, 2:4, 9, 8, 10, 12)]
+    statsDF <- statsDF[order(desc(statsDF$WARSCORE)), ]
+
+    statsDF
+}
+
+
+
+
+## ===========================================================================================================
+## Function computePlayerScore(statsDF, detailedMembersDF)
+##      statsDF - data frame with war stats per player. It's returned with the new column WARSCORE
+##      detailedMembersDF - data frame with all the members individual stats
+##      totalWars - number of wars across which to compute the score (needed because misses remove points)
+##
+## ================ PLAYER SCORE FORMULA:
+## Score / points added:
+## - 500 cards earned = 1 point
+## - 1 war day victory = 5 points
+## - 1 war day victory (all time) - 0.5 points
+## - 2000 cards collected (all time) - 1 point
+##
+## Score / points removed:
+## - Final battle misses: 10 * misses + 3 ^ misses - 1
+##                      0         12         28         56        120        292
+## - Collection battle misses: (1 + misses / 2) ^ 2 - 1
+##                      0   1   3   5   8  11  15  19  24  29  35  41  48  55  63
+## - War miss: (misses / 4) ^ 2
+##                      0, 0.1, 0.3, 0.6, 1, 1.6
+
+computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
+
+    statsDF$WARSCORE <- rep (0L, nrow(statsDF))
+
+    for (i in 1:nrow(statsDF)) {
+        
+        # Check if it's an existing member; skip if not
+        if (nrow(detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]) == 0) next
+        
+        memberWarDayWins = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$warDayWins
+        memberClanCardsCollected = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$clanCardsCollected
+
+        statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 500 
+                                     + statsDF$wins[i] * 5 
+                                     + memberWarDayWins / 2
+                                     + memberClanCardsCollected / 2000
+                                     - 10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1
+                                     - (1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1
+                                     - ((totalWars - statsDF$warsEntered[i]) / 4) ^ 2
+        )
+    }
+    
+    statsDF
+}

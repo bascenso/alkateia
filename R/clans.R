@@ -11,11 +11,11 @@
 ##
 ## Addresses
 ##
-APIEndpoint = "https://api.clashroyale.com/v1"
-clanpath = "/clans"
-memberpath = "/members"
-warlogpath = "/warlog"
-currentwarpath = "/currentwar"
+APIEndpoint <- "https://api.clashroyale.com/v1"
+clanpath <- "/clans"
+memberpath <- "/members"
+warlogpath <- "/warlog"
+currentwarpath <- "/currentwar"
 
 
 ## ===========================================================================================================
@@ -27,16 +27,16 @@ getClanMembers <- function(clanTag, token) {
     APIURL <- paste(APIEndpoint, clanpath, clanTag, sep = "")
 
     clanReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
-    
+
     if (clanReq$status_code != 200) {
         stop(paste("Server returned error:", clanReq$status_code))
     } else {
         clanInfo <- content(clanReq)
-        
+
         # Build DF with member data
         membersDF <- data.frame()
         numMembers <- length(clanInfo$memberList)
-        
+
         for (i in 1:numMembers) {
             membersDF <- rbind(membersDF, data.frame(
                 tag = clanInfo$memberList[[i]]$tag,
@@ -65,7 +65,7 @@ getClanMembers <- function(clanTag, token) {
 
 getClanWarlog <- function (clanTag, token, fileName = "") {
     APIURL <- paste(APIEndpoint, clanpath, clanTag, warlogpath, sep = "")
-    
+
     warlogReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
 
     if (warlogReq$status_code != 200) {
@@ -77,7 +77,7 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
         if (file.exists(fileName)) {
             warlogDF <- readRDS(fileName) # if there is already data present, load it
         } else {
-            warlogDF = data.frame() # else build the DF from scratch
+            warlogDF <- data.frame() # else build the DF from scratch
         }
         
         
@@ -85,9 +85,9 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
             thisWarId <- warlogInfo$items[[i]]$createdDate
             
             if (any(thisWarId == warlogDF$warId)) next # If data about the war is already present, skip it
-            
+
             numParticipants <- length(warlogInfo$items[[i]]$participants)
-            
+
             for (j in 1:numParticipants) { # Get data on each participant
                 warlogDF <- rbind(warlogDF, data.frame(
                     warId = thisWarId,
@@ -100,12 +100,12 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
                     collectionDayBattlesPlayed = warlogInfo$items[[i]]$participants[[j]]$collectionDayBattlesPlayed
                 ))
             }
-            
+
         }
-        
+
         if (fileName != "") saveRDS(warlogDF, fileName)
     }
-     
+
     warlogDF
 }
 
@@ -117,9 +117,9 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
 
 getClanMemberDetails <- function(clanTag, token) {
     APIURL <- paste(APIEndpoint, clanpath, clanTag, sep = "")
-    
+
     clanReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
-    
+
     if (clanReq$status_code != 200) {
         stop(paste("Server returned error:", clanReq$status_code))
     } else {
@@ -127,7 +127,7 @@ getClanMemberDetails <- function(clanTag, token) {
  
         memberInfoDF <- data.frame()
         numMembers <- length(clanInfo$memberList)
-        
+
         for (i in 1:numMembers) {
             iMember <- getPlayerInfo(sub("#", "/%23", clanInfo$memberList[[i]]$tag), token)
 

@@ -14,17 +14,17 @@
 #token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjI4Njc3ODY1LTYyOGUtNDlmYy1hM2ZlLTI4MGY0ODNiNDc1YiIsImlhdCI6MTU0MDIyNDUzNSwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxODguMzcuMTQ4LjEyIl0sInR5cGUiOiJjbGllbnQifV19.ODcsrHxaptKU9fEAiEYluslCT0oV5n2Zc0zc0mYwvPm1misjr7tPQAEnVoSRFn8yuE7abCMht77NYE3cd7bykg"
 
 #Office token
-token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
+token <- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
 
-myplayertag = "/%232UVYQPG2J"
-myclantag = "/%23PG8VC9V"
+myplayertag <- "/%232UVYQPG2J"
+myclantag <- "/%23PG8VC9V"
 
-tplayertag = "/%23992V0CV2U"
+tplayertag <- "/%23992V0CV2U"
 
 ## Files
-warlogFile = "data/warlog.RDS"
-clanStatsFile = "data/clanstats.RDS"
-playerFile = "data/players.RDS"
+warlogFile <- "data/warlog.RDS"
+clanStatsFile <- "data/clanstats.RDS"
+playerFile <- "data/players.RDS"
 
 templateFile <- "data/template.html"
 outputFile <- "../docs/index.html"
@@ -33,16 +33,22 @@ statsJSONfile <- "C:/Data/GDrive/98.CR/alkateia.json"
 statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
 
 
-
 # Tags in template HTML file to replace with the tables
 clanWarTableTag <- "<CLAN_WAR_STATS_TABLE>"
-playerTableTag = "<CLAN_MEMBERS_STATS_TABLE>"
+playerTableTag <- "<CLAN_MEMBERS_STATS_TABLE>"
 
+
+# ******************************************************************************************
+# Support function to test if a file is already open
+# Not immune to race condition...
+is.open <- function (f) {
+    suppressWarnings("try-error" %in% class(try(file(f, open = "w"), silent = TRUE)))
+}
 
 
 
 ## Pretty names for clan stats columns
-clanCols = list(
+clanCols <- list(
     c("tag", "tag"),
     c("name", "Nome"),
     c("currentMember", "Membro?"),
@@ -79,7 +85,7 @@ clanCols = list(
 
 
 ## XLX Description sheet
-descs = list(
+descs <- list(
     c("tag", "Identificador único do jogador"), 
     c("name.x", "Nome actual do jogador "), 
     c("currentMember", "Indica se é ou não membro actual do clã (Yes - é membro; No - já não é membro)"), 
@@ -111,5 +117,3 @@ descs = list(
     c("clanCardsCollected", "Total de cartas colectadas em guerras de clãs (desde sempre, incluindo noutros clãs anteriores)"), 
     c("arena", "Arena ou liga actual")
 )
- 
-   

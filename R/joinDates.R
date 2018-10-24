@@ -1,3 +1,7 @@
+# Stores join dates in a format easy to recover just in case the code goes wrong.
+# Not used anywhere
+
+
 playerInfo[playerInfo$name == "bascenso", ]$joined <- as.Date("2018-03-25")
 playerInfo[playerInfo$name == "Bruno Lopez", ]$joined <- as.Date("2018-06-03")
 playerInfo[playerInfo$name == "carmen", ]$joined <- as.Date("2018-07-31")
