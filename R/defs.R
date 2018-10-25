@@ -36,15 +36,7 @@ statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
 # Tags in template HTML file to replace with the tables
 clanWarTableTag <- "<CLAN_WAR_STATS_TABLE>"
 playerTableTag <- "<CLAN_MEMBERS_STATS_TABLE>"
-
-
-# ******************************************************************************************
-# Support function to test if a file is already open
-# Not immune to race condition...
-is.open <- function (f) {
-    suppressWarnings("try-error" %in% class(try(file(f, open = "w"), silent = TRUE)))
-}
-
+warMapTag <- "<WAR_PARTICIPATION_MAP>"
 
 
 ## Pretty names for clan stats columns
@@ -92,7 +84,7 @@ descs <- list(
     c("warsEntered", "Número de guerras de clã em que participou"), 
     c("collectionDayBattlesPlayed", "Número de batalhas da colecta em que participou. Deveria ser 3 x número de guerras, mas por vezes há quem não faça as 3 batalhas da colecta"),
     c("cardsEarned", "Número total de cartas ganhas para o clã nas colectas em que participou"), 
-    c("battlesPlayed", "Número de batalhas finais que jogou. Pode ser maior que o Número de guerras em que participou porque alguns jogadores tÃÂªm 2 batalhas"), 
+    c("battlesPlayed", "Número de batalhas finais que jogou. Pode ser maior que o número de guerras em que participou porque alguns jogadores têm 2 batalhas"), 
     c("wins", "Número de vitórias em batalhas finais"), 
     c("collectionBattleMisses", "Número de batalhas da colecta não jogadas (é mau...)"), 
     c("finalBattleMisses", "Número de batalhas finais não jogadas (é muito mau!!...)"), 

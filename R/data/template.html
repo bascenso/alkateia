@@ -18,15 +18,15 @@
         <h1>Estatísticas de guerra</h1>
 
         <div>Clica sobre uma coluna para ordenar. Download da tabela: 
-                <a href='http://www.google.com?q=xls'>XLS</a> | 
-                <a href='http://www.google.com?q=csv'>CSV</a> | 
-                <a href='http://www.google.com?q=json'>JSON</a>
+            <a href='http://www.google.com?q=xls'>XLS</a> | 
+            <a href='http://www.google.com?q=csv'>CSV</a> | 
+            <a href='http://www.google.com?q=json'>JSON</a>
         </div>
 
         <table id='warStats' cellspacing='0' cellpadding='0'>
-                <!-- Table will start here -->
-                <CLAN_WAR_STATS_TABLE>
-                <!-- Table will end here -->
+            <!-- Table will start here -->
+            <CLAN_WAR_STATS_TABLE>
+            <!-- Table will end here -->
         </table>
 
     </div>
@@ -34,22 +34,38 @@
     <br><br>
 
     <div id='wrapper'>
-            <h1>Estatísticas individuais</h1>
+        <h1>Estatísticas individuais</h1>
     
-            <div>Clica sobre uma coluna para ordenar. Download da tabela: 
-                    <a href='http://www.google.com?q=xls'>XLS</a> | 
-                    <a href='http://www.google.com?q=csv'>CSV</a> | 
-                    <a href='http://www.google.com?q=json'>JSON</a>
-            </div>
-    
-            <table id='playerStats' cellspacing='0' cellpadding='0'>
-                    <!-- Table will start here -->
-                    <CLAN_MEMBERS_STATS_TABLE>
-                    <!-- Table will end here -->
-            </table>
-
+        <div>Clica sobre uma coluna para ordenar. Download da tabela: 
+            <a href='http://www.google.com?q=xls'>XLS</a> | 
+            <a href='http://www.google.com?q=csv'>CSV</a> | 
+            <a href='http://www.google.com?q=json'>JSON</a>
         </div>
-        <script src='js/jquery.min.js'></script>
+    
+        <table id='playerStats' cellspacing='0' cellpadding='0'>
+            <!-- Table will start here -->
+            <CLAN_MEMBERS_STATS_TABLE>
+            <!-- Table will end here -->
+        </table>
+
+    </div>
+
+    <br><br>
+
+    <div id='wrapper'>
+        <h1>Mapa de participação em guerras</h1>
+    
+        <div>Clica sobre uma coluna para ordenar.</div>
+    
+        <table id='playerStats' cellspacing='0' cellpadding='0'>
+            <!-- Table will start here -->
+            <WAR_PARTICIPATION_MAP>
+            <!-- Table will end here -->
+        </table>
+
+    </div>
+
+    <script src='js/jquery.min.js'></script>
     <script src='js/jquery.tablesorter.min.js'></script>
     <script src='js/sort.js'></script>
 </body>

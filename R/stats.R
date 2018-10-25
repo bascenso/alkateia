@@ -183,3 +183,37 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
     
     statsDF
 }
+
+
+## ===========================================================================================================
+## Function updateJoinDates(detailedMembersDF, playerFile)
+##      detailedMembersDF - data frame with all the members individual stats
+##      playerFile - RDS file path with the player join dates
+##
+updateJoinDates <- function(detailedMembersDF, playerFile) {
+    
+    if (!file.exists(playerFile)) return (detailedMembersDF)
+    
+    playerInfo <- readRDS(playerFile)
+    
+    detailedMembersDF <- merge(detailedMembersDF, playerInfo[, c("tag", "joined")], by.x = "tag", by.y = "tag", all.x = T, all.y = F)
+    
+    newMembers <- detailedMembersDF[is.na(detailedMembersDF$joined), ]
+    
+    # If new members exist, set their join date to today and save new file
+    if (nrow(newMembers) > 0) {
+        newMembers$joined <- Sys.Date()
+        playerInfo <- rbind(playerInfo, newMembers[, c("tag", "name", "joined")])
+        saveRDS(playerInfo, playerFile)
+        
+        for (i in 1:nrow(newMembers)) {
+            detailedMembersDF[detailedMembersDF$tag == newMembers[i, "tag"], ]$joined <- Sys.Date()
+        }
+    }
+    
+    #compute age as nr. days from joined date to today
+    detailedMembersDF$age <- Sys.Date() - detailedMembersDF$joined
+    
+    detailedMembersDF
+    
+}

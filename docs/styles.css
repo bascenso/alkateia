@@ -21,7 +21,7 @@ html { overflow-y: scroll; }
 body { 
   background: #eee;
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 75%;
+  font-size: 80%;
   line-height: 1;
   color: #585858;
   padding: 20px 10px 50px 10px;
@@ -57,10 +57,11 @@ img { border: 0; max-width: 100%; }
 h1 { 
   font-family: Tahoma, sans-serif;
   font-weight: bold;
-  font-size: 3.6em;
+  font-size: 2.6em;
   line-height: 1.7em;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-align: center;
+  color: darkslategrey;
 }
 
 
@@ -75,7 +76,7 @@ h1 {
 
 #warStats, #playerStats {
   margin: 0 auto;
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-bottom: 15px;
 }
 

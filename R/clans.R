@@ -128,7 +128,11 @@ getClanMemberDetails <- function(clanTag, token) {
         memberInfoDF <- data.frame()
         numMembers <- length(clanInfo$memberList)
 
+        cat(numMembers, "members to get. Let's go...\n")
+        
         for (i in 1:numMembers) {
+            cat(i, "..")
+            
             iMember <- getPlayerInfo(sub("#", "/%23", clanInfo$memberList[[i]]$tag), token)
 
             memberInfoDF <- rbind(memberInfoDF, data.frame(
@@ -155,6 +159,7 @@ getClanMemberDetails <- function(clanTag, token) {
             ))
 
         }
+        cat("\n")
     }
     
     memberInfoDF
