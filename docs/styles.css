@@ -7,16 +7,19 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font: inherit;
   vertical-align: baseline;
   outline: none;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased; /* Chrome, Safari, Opera */
+  -webkit-text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%; /* IE, Edge */
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  -moz-box-sizing: border-box; /* Firefox */
   box-sizing: border-box;
 }
 
 
-html { overflow-y: scroll; }
+html { 
+  overflow-y: scroll; 
+  overflow-x: scroll;
+}
 
 body { 
   background: #eee;
@@ -34,7 +37,10 @@ body {
 br { display: block; line-height: 1.6em; } 
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-ol, ul { list-style: none; }
+ol, ul { 
+  list-style: inside;
+  margin-bottom: 4px;
+}
 
 input, textarea { 
   -webkit-font-smoothing: antialiased;
@@ -74,18 +80,18 @@ h1 {
   padding: 10px 17px;
 }
 
-#warStats, #playerStats {
+#warStats, #playerStats, #warMap {
   margin: 0 auto;
-  font-size: 1.1em;
+  font-size: 1.0em;
   margin-bottom: 15px;
 }
 
-#warStats thead, #playerStats thead {
+#warStats thead, #playerStats thead, #warMap thead {
   cursor: pointer;
   background: #c9dff0;
 }
 
-#warStats thead tr th, #playerStats thead tr th { 
+#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th { 
   font-weight: bold;
   vertical-align: middle;
   padding: 12px 22px 12px 22px;
@@ -93,39 +99,57 @@ h1 {
 
 
 #warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
-#playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown {
+#playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown,
+#warMap thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown {
   color: darkred;
   background: #acc8dd;
   border-bottom-color: green;
 }
 
-#warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span {
+#warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span,
+#warMap thead tr th.headerSortUp span {
   background: url('img/uparrow.png') right center no-repeat;
   padding-right: 20px;
 
 }
-#warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span {
+#warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span,
+warMap thead tr th.headerSortDown span {
   background-image: url('img/downarrow.png')  right center no-repeat;
   padding-right: 20px;
 
 }
 
-#warStats tbody tr.even, #playerStats tbody tr.even { 
+#warStats tbody tr.even, #playerStats tbody tr.even, #warMap tbody tr.even { 
   color: #555;
   background: #fff;
 }
 
-#warStats tbody tr.odd, #playerStats tbody tr.odd {
+#warStats tbody tr.odd, #playerStats tbody tr.odd, #warMap tbody tr.odd {
   color: #555;
   background: rgb(250, 250, 250);
 }
 
-#warStats tbody tr td, #playerStats tbody tr td {
+#warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td {
   text-align: center;
   padding: 15px 10px;
 }
 
-#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign {
+#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign, #warMap tbody tr td.lalign {
   font-weight: bold;
   text-align: left;
+}
+
+#warMap tbody tr td.valueMIA {
+  color: #fddbc7;
+  font-style: italic;
+}
+
+#warMap tbody tr td.valueBF {
+  color: #b2182b;
+  font-weight: bold;
+}
+
+#warMap tbody tr td.valueNA {
+  color: #bababa;
+  font-style: oblique;
 }

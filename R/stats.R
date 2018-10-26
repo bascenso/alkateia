@@ -217,3 +217,73 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
     detailedMembersDF
     
 }
+
+
+## ===========================================================================================================
+## Function buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
+##      warlogDF - data frame with the full warlog
+##      detailedMembersDF - data frame with current clan members
+##      nwars - build the map with this many last wars; Default is all wars available
+##
+
+buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
+
+    warCount <- length(unique(warlogDF$warId))
+    wars <- warlogDF
+
+    if (nwars == "all") nwars <- warCount
+
+    if (nwars <= 0 || nwars > warCount) {
+        warning("Invalid number of wars. Defaulting to 'all'.")
+        nwars <- warCount
+    }
+
+    if (nwars < warCount) {
+
+        # Get nwars most recent dates
+        warDates <- unique(warlogDF$warId)
+        warDates <- warDates[order(unique(warlogDF$warEnd), decreasing = TRUE)]
+        warDates <- warDates[1:nwars]
+
+        # subset the most recent wars and drop unused levels from factor
+        wars <- warlogDF[warlogDF$warId %in% warDates, ]
+        wars$tag <- droplevels(wars$tag)
+    }
+
+    # Cast the warlog DF to have the participation per war (only for current members)
+    onlyCurrentMembersDF <- wars[wars$tag %in% detailedMembersDF$tag, ]
+    warParticipationDF <- dcast(data = onlyCurrentMembersDF, 
+                                formula = tag + name ~ as.character(as.Date(onlyCurrentMembersDF$warEnd)), 
+                                value.var = "wins", 
+                                fill = "MIA")
+
+    # Add battle misses
+    missesDF <- wars[wars$battlesPlayed == 0, ]
+    missesDF$warEnd <- as.character(as.Date(missesDF$warEnd))
+    missesDF$tag <- as.character(missesDF$tag)
+    
+    for (i in 1:nrow(missesDF))
+        warParticipationDF[warParticipationDF$tag == missesDF[i, ]$tag, missesDF[i, ]$warEnd] <- "-BF"
+    
+    # Add members with no wars
+    # <PENDING!!>
+
+    # Add NA for wars where the member was not yet in the clan
+    # For each member and for each battle (date)
+    for (iMember in 1:nrow(warParticipationDF)) {
+
+        joinDate <- detailedMembersDF[detailedMembersDF$tag == as.character(warParticipationDF[iMember, "tag"]), ]$joined
+
+        for (iCol in 1:length(colnames(warParticipationDF))) {
+            if (colnames(warParticipationDF)[iCol] == "tag" || colnames(warParticipationDF)[iCol] == "name") next
+
+            warDate <- colnames(warParticipationDF)[iCol]
+
+            if (warDate < joinDate) warParticipationDF[iMember, iCol] <- NA
+
+        }
+    }
+
+    warParticipationDF
+
+}

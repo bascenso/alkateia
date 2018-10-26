@@ -42,10 +42,18 @@ statsDF <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
 detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
 
 
+## ===========================================================================================================
+## Build war participation map
+##
+warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = 15)
+
+
+
 ## Build HTML table with war stats and individual stats
-writeHTMLFile(list(clanWarTableTag, playerTableTag),
+writeHTMLFile(list(clanWarTableTag, playerTableTag, warMapTag),
               list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
-                   detailedMembersDF),
+                   detailedMembersDF, 
+                   warParticipationDF[, names(warParticipationDF) != "tag"]),
               templateFile, outputFile)
 
 
@@ -61,41 +69,3 @@ write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", co
 
 ## Create a new entry with the clan stats
 clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)
-
-
-#===========================================================================
-# THIS CODE MUST MOVE TO A FUNCTION!!!
-
-
-# cast the DF to have the participation per war (only for current members)
-onlyCurrentMembersDF <- warlogDF[warlogDF$tag %in% membersDF$tag, ]
-warParticipationDF <- dcast(data = onlyCurrentMembersDF, 
-                            formula = tag + name ~ as.character(as.Date(onlyCurrentMembersDF$warEnd)), 
-                            value.var = "wins", 
-                            fill = "MIA")
-
-# Add battle misses
-missesDF <- warlogDF[warlogDF$battlesPlayed == 0, ]
-missesDF$warEnd <- as.character(as.Date(missesDF$warEnd))
-missesDF$tag <- as.character(missesDF$tag)
-
-for (i in 1:nrow(missesDF))
-    warParticipationDF[warParticipationDF$tag == missesDF[i, ]$tag, missesDF[i, ]$warEnd] <- "-BF"
-
-# Add members with no wars
-
-
-# Add NA for wars where the member was not yet in the clan
-# For each member and for each battle (date)
-for (iMember in 1:nrow(warParticipationDF)) {
-
-    for (iCol in 1:length(colnames(warParticipationDF))) {
-        if (colnames(warParticipationDF)[iCol] == "tag" || colnames(warParticipationDF)[iCol] == "name") next
-
-        joinDate <- detailedMembersDF[detailedMembersDF$tag == as.character(warParticipationDF[iMember, "tag"]), ]$joined
-        warDate <- colnames(warParticipationDF)[iCol]
-
-        if (warDate < joinDate) warParticipationDF[iMember, iCol] <- NA
-
-    }
-}

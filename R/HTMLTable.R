@@ -69,17 +69,29 @@ buildHTMLTable <- function (statsTable) {
         
     ## TABLE BODY / ROWS
     innerHTML <- paste(innerHTML, "<tbody>", sep = "\n")
-    
+
     for (i in 1:nrow(statsTable)) { # for each row
 
         innerHTML <- paste(innerHTML, "<tr>", sep = "\n")
 
         for (j in 1:ncol(statsTable)) { # for each cell
-            if (j == 1) # first cell with class = lalign
-                cellData <- paste("<td class='lalign'>", statsTable[i, j], "</td>", sep = "")
-            else
-                cellData <- paste("<td>", statsTable[i, j], "</td>", sep = "")
 
+            if (j == 1) { # first cell with class = lalign
+                cellData <- paste("<td class='lalign'>", statsTable[i, j], "</td>", sep = "")
+            
+            } else if (is.na(statsTable[i, j])) {
+                cellData <- paste("<td class ='valueNA'>", statsTable[i, j], "</td>", sep = "")
+            
+            } else if (as.character(statsTable[i, j]) == "MIA") {
+                cellData <- paste("<td class ='valueMIA'>", statsTable[i, j], "</td>", sep = "")
+            
+            } else if (as.character(statsTable[i, j]) == "-BF") {
+                cellData <- paste("<td class ='valueBF'>", statsTable[i, j], "</td>", sep = "")
+
+            } else {
+                cellData <- paste("<td>", statsTable[i, j], "</td>", sep = "")
+            }
+            
             innerHTML <- paste(innerHTML, cellData, sep = "\n")
         }
 

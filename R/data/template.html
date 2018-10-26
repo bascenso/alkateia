@@ -57,12 +57,20 @@
     
         <div>Clica sobre uma coluna para ordenar.</div>
     
-        <table id='playerStats' cellspacing='0' cellpadding='0'>
+        <table id='warMap' cellspacing='0' cellpadding='0'>
             <!-- Table will start here -->
             <WAR_PARTICIPATION_MAP>
             <!-- Table will end here -->
         </table>
-
+        <div>
+            Legenda:
+            <ul>
+                <li>{0, 1, 2}: Participou na guerra com {0, 1, 2} vitórias na batalha final</li>
+                <li>-BF: Participou na guerra, mas não fez a batalha final :(</li>
+                <li>MIA: Não participou na guerra</li>
+                <li>NA: Ainda não estava no clã na data da guerra</li>
+            </ul>
+        </div>
     </div>
 
     <script src='js/jquery.min.js'></script>
