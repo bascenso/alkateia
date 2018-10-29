@@ -11,6 +11,7 @@ source("clans.R", encoding = "utf-8")
 source("players.R", encoding = "utf-8")
 source("stats.R", encoding = "utf-8")
 source("HTMLTable.R", encoding = "utf-8")
+source("dumpTables.R", encoding = "utf-8")
 
 
 ## ================ Get my clan member list
@@ -55,6 +56,13 @@ writeHTMLFile(list(clanWarTableTag, playerTableTag, warMapTag),
                    detailedMembersDF, 
                    warParticipationDF[, names(warParticipationDF) != "tag"]),
               templateFile, outputFile)
+
+
+## Dump tables to file
+result <- dumpTables(list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
+                          detailedMembersDF, 
+                          warParticipationDF[, names(warParticipationDF) != "tag"]),
+                     c("warstats", "memberstats", "warmap"), dataPath)
 
 
 ## Merge all player stats (war and individual), and save to XLXS file

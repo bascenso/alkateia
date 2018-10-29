@@ -73,11 +73,11 @@ h1 {
 
 /** page structure **/
 #wrapper {
-  display: block;
+  /*display: block;*/
   background: #fff;
-  width: 1500px;
+  /*width: 1000 px;*/
   margin: 0 auto;
-  padding: 10px 17px;
+  padding: 20px 17px;
 }
 
 #warStats, #playerStats, #warMap {
