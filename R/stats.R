@@ -212,7 +212,7 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
     }
     
     #compute age as nr. days from joined date to today
-    detailedMembersDF$age <- Sys.Date() - detailedMembersDF$joined
+    detailedMembersDF$age <- as.numeric(Sys.Date() - detailedMembersDF$joined)
     
     detailedMembersDF
     
@@ -257,6 +257,9 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
                                 value.var = "wins", 
                                 fill = "MIA")
 
+    # Reorder columns from most recent to oldest... is there a better way to do this?
+    warParticipationDF <- warParticipationDF[, c(1, 2, 2 + order(names(warParticipationDF)[3:ncol(warParticipationDF)], decreasing = T))]
+    
     # Add battle misses
     missesDF <- wars[wars$battlesPlayed == 0, ]
     missesDF$warEnd <- as.character(as.Date(missesDF$warEnd))
@@ -284,6 +287,7 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
         }
     }
 
+    
     warParticipationDF
 
 }

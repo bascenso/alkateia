@@ -1,2 +1,2 @@
 # alkateia
-Clash Royale clã 'Alkateia PT' website and data
+Clash Royale clan 'Alkateia PT' website and data

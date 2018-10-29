@@ -45,7 +45,7 @@ detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
 ## ===========================================================================================================
 ## Build war participation map
 ##
-warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = 15)
+warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
 
 
 
