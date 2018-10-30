@@ -48,6 +48,10 @@ detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
 ##
 warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
 
+## ===========================================================================================================
+## Create a new entry with the clan stats
+##
+clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)
 
 
 ## Build HTML table with war stats and individual stats
@@ -55,6 +59,7 @@ writeHTMLFile(list(clanWarTableTag, playerTableTag, warMapTag),
               list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
                    detailedMembersDF, 
                    warParticipationDF[, names(warParticipationDF) != "tag"]),
+              c(FALSE, FALSE, TRUE),
               templateFile, outputFile)
 
 
@@ -74,6 +79,3 @@ allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
 write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
 
-
-## Create a new entry with the clan stats
-clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)

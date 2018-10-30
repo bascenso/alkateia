@@ -33,7 +33,8 @@ logClanStats <- function(detailedMembersDF, clanStatsFile) {
             avgChallengeMaxWins = round(mean(detailedMembersDF$challengeMaxWins), 1),
             avgDonations = round(mean(detailedMembersDF$totalDonations)),
             avgWarDayWins = round(mean(detailedMembersDF$warDayWins), 1),
-            avgCardsCollected = round(mean(detailedMembersDF$clanCardsCollected))
+            avgCardsCollected = round(mean(detailedMembersDF$clanCardsCollected)),
+            avgAge = round(mean(detailedMembersDF$age))
         ))
 
         saveRDS(clanStatsDF, clanStatsFile)

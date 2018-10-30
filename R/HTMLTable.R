@@ -7,11 +7,12 @@
 ## ===========================================================================================================
 ## Function writeHTMLFile(stats, template, output) - writes the HTML file replacing the tag with the table
 ##      tableTag - list of table tags to replace in the template
-##      statsTable - lsit of DFs with the data (must have the same order as the tags)
+##      stats - list of DFs with the data (must have the same order as the tags)
+##      useImages - list of TRUE/FALSE indicating wheather to use images or not for the table
 ##      templateFile - HTML template to replace the table code
 ##      outputFile - file to output the result (template + table data)
 
-writeHTMLFile <- function(tableTag, stats, template, output) {
+writeHTMLFile <- function(tableTag, stats, useImages, template, output) {
     
     if (!file.exists(template)) {
         warning(paste(template, ":: Template file not found."))
@@ -30,7 +31,7 @@ writeHTMLFile <- function(tableTag, stats, template, output) {
     
     # Generate new HTML replacing the tags with the table data
     for (i in 1:length(tableTag)) {
-        htmlCode <- sub(tableTag[[i]], buildHTMLTable(stats[[i]]), htmlCode)
+        htmlCode <- sub(tableTag[[i]], buildHTMLTable(stats[[i]], useImages[i]), htmlCode)
     }
     
     # Write output file
@@ -39,11 +40,13 @@ writeHTMLFile <- function(tableTag, stats, template, output) {
     close(con)
 }
 
+
 ## ===========================================================================================================
 ## Function buildHTMLTable(statsTable) - builds the HTML table string
 ##      statsTable - DF with the data
-
-buildHTMLTable <- function (statsTable) {
+##      useImages - wheather to convert some strings to images
+##
+buildHTMLTable <- function (statsTable, useImages = FALSE) {
 
     if (nrow(statsTable) < 1) return ("Dados não disponíveis...")
     
@@ -82,11 +85,8 @@ buildHTMLTable <- function (statsTable) {
             } else if (is.na(statsTable[i, j])) {
                 cellData <- paste("<td class ='valueNA'>", statsTable[i, j], "</td>", sep = "")
             
-            } else if (as.character(statsTable[i, j]) == "MIA") {
-                cellData <- paste("<td class ='valueMIA'>", statsTable[i, j], "</td>", sep = "")
-            
-            } else if (as.character(statsTable[i, j]) == "-BF") {
-                cellData <- paste("<td class ='valueBF'>", statsTable[i, j], "</td>", sep = "")
+            } else if (useImages) {
+                cellData <- getImage(as.character(statsTable[i, j]))
 
             } else {
                 cellData <- paste("<td>", statsTable[i, j], "</td>", sep = "")
@@ -101,4 +101,20 @@ buildHTMLTable <- function (statsTable) {
     innerHTML <- paste(innerHTML, "</tbody>", sep = "\n")
     
     innerHTML
+}
+
+
+
+
+getImage <- function(value) {
+    
+    retString <- switch(value,
+           "MIA" = paste("<td class ='valueMIA'>", value, "</td>", sep = ""),
+           "-BF" = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-miss.png'>", "</td>", sep = ""),
+           "0"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-loss.png'>", "</td>", sep = ""),
+           "1"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+           "2"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'><img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+           paste("<td>", value, "</td>", sep = "")
+           )
+    retString
 }

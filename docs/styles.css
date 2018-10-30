@@ -60,6 +60,15 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 img { border: 0; max-width: 100%; }
 
+img.warIcon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: 25px;
+  width: 17px;
+  background-color: transparent;
+}
+
 h1 { 
   font-family: Tahoma, sans-serif;
   font-weight: bold;

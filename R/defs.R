@@ -22,7 +22,7 @@ myclantag <- "/%23PG8VC9V"
 tplayertag <- "/%23992V0CV2U"
 
 ## Files
-dataPath <- "../docs/data/"
+dataPath <- "../docs/data"
 warlogFile <- "data/warlog.RDS"
 clanStatsFile <- "data/clanstats.RDS"
 playerFile <- "data/players.RDS"
