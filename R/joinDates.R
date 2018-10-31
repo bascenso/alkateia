@@ -21,6 +21,8 @@ playerInfo[playerInfo$name == "Manu", ]$joined <- as.Date("2018-02-20")
 
 playerInfo[playerInfo$name == "Inferno", ]$joined <- as.Date("2018-03-25")
 
+playerInfo[playerInfo$name == "pedro", ]$joined <- as.Date("2018-04-28")
+
 
 playerInfo[playerInfo$name == "Bruno Lopez", ]$joined <- as.Date("2018-06-03")
 playerInfo[playerInfo$name == "carmen", ]$joined <- as.Date("2018-07-31")
@@ -59,4 +61,6 @@ playerInfo[playerInfo$name == "YOSHINZ", ]$joined <- as.Date("2018-10-07")
 playerInfo[playerInfo$name == "zau", ]$joined <- as.Date("2018-07-21")
 playerInfo[playerInfo$name == "ZezinhoPT", ]$joined <- as.Date("2018-09-19")
 playerInfo[playerInfo$name == "Jonas 705", ]$joined <- as.Date("2018-10-27")
+
+
 

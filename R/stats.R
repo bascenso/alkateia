@@ -172,13 +172,17 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
         memberWarDayWins = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$warDayWins
         memberClanCardsCollected = detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$clanCardsCollected
 
+        # Number of wars where the player could have entered since joined the clan
+        memberMaxWars <- as.numeric(round((Sys.Date() - detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$joined) / 2))
+        maxWars <- ifelse(memberMaxWars > totalWars, totalWars, memberMaxWars)
+        
         statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 500 
-                                     + statsDF$wins[i] * 5 
-                                     + memberWarDayWins / 2
-                                     + memberClanCardsCollected / 2000
-                                     - 10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1
-                                     - (1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1
-                                     - ((totalWars - statsDF$warsEntered[i]) / 4) ^ 2
+                                     + (statsDF$wins[i] * 5)
+                                     + (memberWarDayWins / 2)
+                                     + (memberClanCardsCollected / 2000)
+                                     - (10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1)
+                                     - ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
+                                     - (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
     }
     
