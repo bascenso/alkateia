@@ -274,8 +274,19 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
         warParticipationDF[warParticipationDF$tag == missesDF[i, ]$tag, missesDF[i, ]$warEnd] <- "-BF"
     
     # Add members with no wars
-    # <PENDING!!>
+    # UNDER CONSTRUCTION
+    membersWithNoWars <- detailedMembersDF[!(detailedMembersDF$tag %in% warParticipationDF$tag), c("tag", "name")]
 
+    tempDF <- warParticipationDF[1:nrow(membersWithNoWars), ]
+    for(i in 1:nrow(tempDF)) for(j in 3:ncol(tempDF)) tempDF[i, j] <- "MIA"
+    
+    ## Need to add levels to factor :(
+    #for(i in 1:nrow(membersWithNoWars)) {
+    #    tempDF[i, ]$tag <- membersWithNoWars[i, ]$tag
+    #    tempDF[i, ]$name <- membersWithNoWars[i, ]$name
+    #}
+    
+    
     # Add NA for wars where the member was not yet in the clan
     # For each member and for each battle (date)
     for (iMember in 1:nrow(warParticipationDF)) {

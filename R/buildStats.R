@@ -31,6 +31,12 @@ detailedMembersDF <- getClanMemberDetails(myclantag, token)
 
 
 ## ===========================================================================================================
+## Update player join dates
+##
+detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
+
+
+## ===========================================================================================================
 ## Build war stats
 ##
 message("Building stats...")
@@ -38,15 +44,10 @@ statsDF <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
 
 
 ## ===========================================================================================================
-## Update player join dates
-##
-detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
-
-
-## ===========================================================================================================
 ## Build war participation map
 ##
 warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
+
 
 ## ===========================================================================================================
 ## Create a new entry with the clan stats
