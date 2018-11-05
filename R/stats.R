@@ -137,6 +137,70 @@ buildWarStats <- function(warlogDF, membersDF, detailedMembersDF, nwars = "all")
 }
 
 
+## ===========================================================================================================
+## Function buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nmonth = 3)
+##      warlogDF - data frame with the log of all war participation
+##      membersDF - data frame with all the members of the clan
+##      detailedMembersDF - data frame with all the members individual stats. needed to compute warscore
+##      nperiod - number of last periods to include in the map; tipically period = month
+##      warsPerPeriod - number of wars in each period; tipically 15 for month periods
+##
+
+buildEvolutionMap <- function(warlogDF, membersDF, detailedMembersDF, nperiod = 3, warsPerPeriod = 15) {
+    
+    warCount <- length(unique(warlogDF$warId))
+    completePeriods <- warCount %/% warsPerPeriod
+    mapPeriods <- ifelse(nperiod > completePeriods, completePeriods, nperiod)    
+    
+
+    #Columns: tag   name    winsP1 scoreP1 rankP1  ... allWins allScore allRank
+    evolutionDF <- membersDF[, c("tag", "name")]
+    
+    for (i in 1:mapPeriods) {
+        periodData <- buildWarStats(warlogDF, membersDF, detailedMembersDF, i*warsPerPeriod)
+
+        #Initialize columns
+        evolutionDF$wins <- rep(0, nrow(evolutionDF))
+        evolutionDF$score <- rep(0, nrow(evolutionDF))
+        evolutionDF$rank <- rep(1, nrow(evolutionDF))
+        
+        #Set values for wins and score
+        for (j in 1:nrow(evolutionDF)) {
+            evolutionDF[j, "wins"] <- periodData[periodData$name == evolutionDF[j, "name"], "wins"]
+            evolutionDF[j, "score"] <- periodData[periodData$name == evolutionDF[j, "name"], "WARSCORE"]
+        }
+        
+        # Set the ranks (awkward solution #1)
+        ranks <- order(evolutionDF$score, decreasing = T)
+        for (j in 1:length(ranks)) evolutionDF[ranks[j], "rank"] <- j
+        
+        # Rename the columns (awkward solution #2)
+        names(evolutionDF)[names(evolutionDF) == "wins"] <- paste("winsP", i, sep = "")
+        names(evolutionDF)[names(evolutionDF) == "score"] <- paste("scoreP", i, sep = "")
+        names(evolutionDF)[names(evolutionDF) == "rank"] <- paste("rankP", i, sep = "")
+        
+    }
+
+    # Add the all time values
+    totalData <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
+
+    #Initialize columns
+    evolutionDF$allWins <- rep(0, nrow(evolutionDF))
+    evolutionDF$allScore <- rep(0, nrow(evolutionDF))
+    evolutionDF$allRank <- rep(1, nrow(evolutionDF))
+    
+    #Set values for wins and score
+    for (j in 1:nrow(evolutionDF)) {
+        evolutionDF[j, "allWins"] <- totalData[totalData$name == evolutionDF[j, "name"], "wins"]
+        evolutionDF[j, "allScore"] <- totalData[totalData$name == evolutionDF[j, "name"], "WARSCORE"]
+    }
+    
+    # Set the ranks (again the awkward solution)
+    ranks <- order(evolutionDF$allScore, decreasing = T)
+    for (j in 1:length(ranks)) evolutionDF[ranks[j], "allRank"] <- j
+    
+    evolutionDF
+}
 
 
 ## ===========================================================================================================

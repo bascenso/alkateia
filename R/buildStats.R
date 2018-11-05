@@ -50,6 +50,12 @@ warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
 
 
 ## ===========================================================================================================
+## Build performance evolution map
+##
+evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod = 3, warsPerPeriod = 15)
+
+
+## ===========================================================================================================
 ## Create a new entry with the clan stats
 ##
 clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)

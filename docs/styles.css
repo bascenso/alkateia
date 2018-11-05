@@ -124,6 +124,7 @@ h1 {
   padding-right: 20px;
 
 }
+
 #warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span,
 warMap thead tr th.headerSortDown span {
   background-image: url('img/downarrow.png')  right center no-repeat;
