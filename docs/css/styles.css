@@ -75,13 +75,32 @@ img.warIcon {
 h1 { 
   font-family: Tahoma, sans-serif;
   font-weight: bold;
-  font-size: 2.6em;
+  font-size: 2.5em;
   line-height: 1.7em;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: center;
   color: darkslategrey;
 }
 
+h2 { 
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 2.0em;
+  line-height: 1.7em;
+  margin-bottom: 10px;
+  text-align: center;
+  color: darkslategrey;
+}
+
+h5 { 
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1.7em;
+  margin-bottom: 2px;
+  text-align: center;
+  color: darkred;
+}
 
 /** page structure **/
 #wrapper {
@@ -92,18 +111,18 @@ h1 {
   padding: 20px 17px;
 }
 
-#warStats, #playerStats, #warMap {
+#warStats, #playerStats, #warMap, #playerEvolution {
   margin: 0 auto;
   font-size: 1.0em;
   margin-bottom: 15px;
 }
 
-#warStats thead, #playerStats thead, #warMap thead {
+#warStats thead, #playerStats thead, #warMap thead, #playerEvolution thead {
   cursor: pointer;
   background: #c9dff0;
 }
 
-#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th { 
+#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th, playerEvolution thead tr th { 
   font-weight: bold;
   vertical-align: middle;
   padding: 12px 22px 12px 22px;
@@ -112,47 +131,47 @@ h1 {
 
 #warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
 #playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown,
-#warMap thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown {
+#warMap thead tr th.headerSortUp, #warMap thead tr th.headerSortDown,
+#playerEvolution thead tr th.headerSortUp, #playerEvolution thead tr th.headerSortDown 
+{
   color: darkred;
   background: #acc8dd;
   border-bottom-color: green;
 }
 
 #warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span,
-#warMap thead tr th.headerSortUp span {
+#warMap thead tr th.headerSortUp span, #playerEvolution thead tr th.headerSortUp span {
   background: url('img/uparrow.png') right center no-repeat;
   padding-right: 20px;
-
 }
 
 #warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span,
-warMap thead tr th.headerSortDown span {
+#warMap thead tr th.headerSortDown span, #playerEvolution thead tr th.headerSortDown span {
   background-image: url('img/downarrow.png')  right center no-repeat;
   padding-right: 20px;
-
 }
 
-#warStats tbody tr.even, #playerStats tbody tr.even, #warMap tbody tr.even { 
+#warStats tbody tr.even, #playerStats tbody tr.even, #warMap tbody tr.even, #playerEvolution tbody tr.even { 
   color: #555;
   background: #fff;
 }
 
-#warStats tbody tr.odd, #playerStats tbody tr.odd, #warMap tbody tr.odd {
+#warStats tbody tr.odd, #playerStats tbody tr.odd, #warMap tbody tr.odd, #playerEvolution tbody tr.odd {
   color: #555;
   background: rgb(250, 250, 250);
 }
 
-#warStats tbody tr:hover, #playerStats tbody tr:hover, #warMap tbody tr:hover {
+#warStats tbody tr:hover, #playerStats tbody tr:hover, #warMap tbody tr:hover, #playerEvolution tbody tr:hover {
   background: #dee9f1;
 }
 
 
-#warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td {
+#warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td, #playerEvolution tbody tr td {
   text-align: center;
   padding: 15px 10px;
 }
 
-#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign, #warMap tbody tr td.lalign {
+#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign, #warMap tbody tr td.lalign, #playerEvolution tbody tr td.lalign {
   font-weight: bold;
   text-align: left;
 }

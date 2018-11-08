@@ -33,3 +33,124 @@ dumpTables <- function(tableList, tableNames, dataFolder) {
 
     i    
 }
+
+
+# Test: dumpHTMLFile(c("warMap"), list(warParticipationDF), dataPath, c(TRUE))
+
+## ===========================================================================================================
+## Function dumpHTMLFile(tNames, tList, location, useImages) - dumps the tables as HTML files
+##      tNames - list of tables names to use in file names
+##      tList - list of DFs with the data (must have the same order as the names)
+##      useImages - list of TRUE/FALSE indicating wheather to use images or not for the table
+##      location - folder to write the output files
+##
+## Dumps a list of tables to HTML files
+
+dumpHTMLFile <- function(tNames, tList, useImages, location) {
+
+    if (!file.exists(location)) {
+        warning(paste(location, ":: Location not found."))
+        return("")
+    }
+    
+    if (length(tNames) == 0 || length(tList) == 0 || length(tNames) != length(tList)) {
+        warning("write HTML file not possible: arguments of 0 or different length")
+        return("")
+    }
+    
+    # Generate new HTML replacing the tags with the table data
+    for (i in 1:length(tNames)) {
+        htmlCode <- buildHTMLTable(tNames[i], tList[[i]], useImages[i])
+    
+        # Write output file
+        outFile <- paste(location, "/", tolower(tNames[i]), ".html", sep = "")
+        con <- file(outFile, open = "w")
+
+        writeLines(htmlCode, con, useBytes = T)
+        close(con)
+    }
+    
+    i
+}
+
+
+## ===========================================================================================================
+## Function buildHTMLTable(statsTable) - builds the HTML table string
+##      tName - name of the table to use in the id
+##      statsTable - DF with the data
+##      useImages - wheather to convert some strings to images
+##
+buildHTMLTable <- function (tName, statsTable, useImages = FALSE) {
+    
+    if (nrow(statsTable) < 1) return ("Dados não disponíveis...")
+    
+    prettyNames <- t(data.frame(clanCols))
+    
+    ## TAG <table>
+    innerHTML <- paste("<table id='", tName, "' cellspacing='0' cellpadding='0'>", sep = "")
+
+    ## TABLE HEAD
+    innerHTML <- paste(innerHTML, "<thead>", sep = "\n")
+    innerHTML <- paste(innerHTML, "<tr>", sep = "\n")
+    
+    for(i in 1:length(names(statsTable))) {
+        iName = match(names(statsTable)[i], prettyNames)
+        prettyName <- ifelse(is.na(iName), names(statsTable)[i], prettyNames[iName, 2])
+        
+        colName <- paste("<th><span>", prettyName, "</span></th>", sep = "")
+        innerHTML <- paste(innerHTML, colName, sep = "\n")
+    }
+    
+    innerHTML <- paste(innerHTML, "</tr>", sep = "\n")
+    innerHTML <- paste(innerHTML, "</thead>", sep = "\n")
+    
+    
+    ## TABLE BODY / ROWS
+    innerHTML <- paste(innerHTML, "<tbody>", sep = "\n")
+    
+    for (i in 1:nrow(statsTable)) { # for each row
+        
+        innerHTML <- paste(innerHTML, "<tr>", sep = "\n")
+        
+        for (j in 1:ncol(statsTable)) { # for each cell
+            
+            if (j == 1) { # first cell with class = lalign
+                cellData <- paste("<td class='lalign'>", statsTable[i, j], "</td>", sep = "")
+                
+            } else if (is.na(statsTable[i, j])) {
+                cellData <- paste("<td class ='valueNA'>", statsTable[i, j], "</td>", sep = "")
+                
+            } else if (useImages) {
+                cellData <- getImage(as.character(statsTable[i, j]))
+                
+            } else {
+                cellData <- paste("<td>", statsTable[i, j], "</td>", sep = "")
+            }
+            
+            innerHTML <- paste(innerHTML, cellData, sep = "\n")
+        }
+        
+        innerHTML <- paste(innerHTML, "</tr>", sep = "\n")
+    }
+    
+    innerHTML <- paste(innerHTML, "</tbody>", sep = "\n")
+    innerHTML <- paste(innerHTML, "</table>", sep = "\n")
+    
+    innerHTML
+}
+
+
+
+
+getImage <- function(value) {
+    
+    retString <- switch(value,
+                        "MIA" = paste("<td class ='valueMIA'>", value, "</td>", sep = ""),
+                        "-BF" = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-miss.png'>", "</td>", sep = ""),
+                        "0"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-loss.png'>", "</td>", sep = ""),
+                        "1"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+                        "2"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'><img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+                        paste("<td>", value, "</td>", sep = "")
+    )
+    retString
+}

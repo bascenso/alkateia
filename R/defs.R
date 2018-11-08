@@ -27,18 +27,8 @@ warlogFile <- "data/warlog.RDS"
 clanStatsFile <- "data/clanstats.RDS"
 playerFile <- "data/players.RDS"
 
-templateFile <- "data/template.html"
-outputFile <- "../docs/index.html"
-
 statsJSONfile <- "C:/Data/GDrive/98.CR/alkateia.json"
 statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
-
-
-# Tags in template HTML file to replace with the tables
-clanWarTableTag <- "<CLAN_WAR_STATS_TABLE>"
-playerTableTag <- "<CLAN_MEMBERS_STATS_TABLE>"
-warMapTag <- "<WAR_PARTICIPATION_MAP>"
-
 
 ## Pretty names for clan stats columns
 clanCols <- list(

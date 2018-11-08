@@ -10,7 +10,6 @@ source("defs.R", encoding = "utf-8")
 source("clans.R", encoding = "utf-8")
 source("players.R", encoding = "utf-8")
 source("stats.R", encoding = "utf-8")
-source("HTMLTable.R", encoding = "utf-8")
 source("dumpTables.R", encoding = "utf-8")
 
 
@@ -61,13 +60,16 @@ evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod
 clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)
 
 
-## Build HTML table with war stats and individual stats
-writeHTMLFile(list(clanWarTableTag, playerTableTag, warMapTag),
-              list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
-                   detailedMembersDF, 
-                   warParticipationDF[, names(warParticipationDF) != "tag"]),
-              c(FALSE, FALSE, TRUE),
-              templateFile, outputFile)
+## Build HTML table files
+result <- dumpHTMLFile(
+        c("warStats", "playerStats", "warMap", "playerEvolution"),
+        list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
+             detailedMembersDF, 
+             warParticipationDF[, names(warParticipationDF) != "tag"],
+             evolutionDF),
+        c(FALSE, FALSE, TRUE, FALSE),
+        dataPath
+)
 
 
 ## Dump tables to file

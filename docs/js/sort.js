@@ -1,4 +1,5 @@
 $(function($){
+
     $('#warStats').tablesorter({
       widgets: ['zebra'],
       widgetZebra: { css: ['odd', 'even' ] }
@@ -12,6 +13,11 @@ $(function($){
     $('#warMap').tablesorter({
       widgets: ['zebra'],
       widgetZebra: { css: ['odd', 'even' ] }
+    });
+
+    $('#playerEvolution').tablesorter({
+      widgets: ['zebra'],
+      widgetZebra: { css: ['odd', 'even' ] }
     }); 
 
-  });
+});
