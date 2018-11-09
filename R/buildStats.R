@@ -1,10 +1,10 @@
 
-library(httr, quietly = T)
-library(dplyr, quietly = T)
-library(data.table, quietly = T)
-library(jsonlite, quietly = T)
-library(xlsx, quietly = T)
-library(reshape2, quietly = T)
+suppressPackageStartupMessages(library(httr))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(jsonlite))
+suppressPackageStartupMessages(library(xlsx))
+suppressPackageStartupMessages(library(reshape2))
 
 source("defs.R", encoding = "utf-8")
 source("clans.R", encoding = "utf-8")

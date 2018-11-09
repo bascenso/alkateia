@@ -75,9 +75,9 @@ img.warIcon {
 h1 { 
   font-family: Tahoma, sans-serif;
   font-weight: bold;
-  font-size: 2.5em;
+  font-size: 2.4em;
   line-height: 1.7em;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
   text-align: center;
   color: darkslategrey;
 }
@@ -95,10 +95,10 @@ h2 {
 h5 { 
   font-family: Tahoma, sans-serif;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.0em;
   line-height: 1.7em;
-  margin-bottom: 2px;
-  text-align: center;
+  margin-bottom: 1px;
+  text-align: left;
   color: darkred;
 }
 
@@ -112,22 +112,25 @@ h5 {
 }
 
 #warStats, #playerStats, #warMap, #playerEvolution {
-  margin: 0 auto;
+  margin: 1 auto;
   font-size: 1.0em;
   margin-bottom: 15px;
 }
 
 #warStats thead, #playerStats thead, #warMap thead, #playerEvolution thead {
   cursor: pointer;
-  background: #c9dff0;
 }
 
-#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th, playerEvolution thead tr th { 
+#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th, #playerEvolution thead tr th { 
   font-weight: bold;
+  font-size: 0.9em;
   vertical-align: middle;
-  padding: 12px 22px 12px 22px;
+  padding: 12px 25px 12px 25px; /* top right bottom left */
+  background-repeat: no-repeat;
+  background-position: right center;
+  color: darkblue;
+  background: #acc8dd;
 }
-
 
 #warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
 #playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown,
@@ -135,19 +138,18 @@ h5 {
 #playerEvolution thead tr th.headerSortUp, #playerEvolution thead tr th.headerSortDown 
 {
   color: darkred;
-  background: #acc8dd;
-  border-bottom-color: green;
+  background: #97bfdd;
 }
 
 #warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span,
 #warMap thead tr th.headerSortUp span, #playerEvolution thead tr th.headerSortUp span {
-  background: url('img/uparrow.png') right center no-repeat;
+  background-image: url('img/uparrow.png') right center no-repeat;
   padding-right: 20px;
 }
 
 #warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span,
 #warMap thead tr th.headerSortDown span, #playerEvolution thead tr th.headerSortDown span {
-  background-image: url('img/downarrow.png')  right center no-repeat;
+  background-image: url('img/downarrow.png') right center no-repeat;
   padding-right: 20px;
 }
 
@@ -164,7 +166,6 @@ h5 {
 #warStats tbody tr:hover, #playerStats tbody tr:hover, #warMap tbody tr:hover, #playerEvolution tbody tr:hover {
   background: #dee9f1;
 }
-
 
 #warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td, #playerEvolution tbody tr td {
   text-align: center;

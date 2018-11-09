@@ -70,6 +70,12 @@ dumpHTMLFile <- function(tNames, tList, useImages, location) {
         close(con)
     }
     
+    # Write date to file
+    outFile <- paste(location, "/", "lastupdate.html", sep = "")
+    con <- file(outFile, open = "w", encoding = "UTF-8")
+    writeLines(paste("<h5>Actualização de dados: ", Sys.time(), "<h5>",sep = ""), con)
+    close(con)
+    
     i
 }
 

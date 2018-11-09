@@ -63,7 +63,19 @@ clanCols <- list(
     c("arena", "Arena"),
     c("WARSCORE", "Contributo para o clã"),
     c("joined", "Data entrada"), 
-    c("age", "Dias no clã")
+    c("age", "Dias no clã"),
+    c("winsP1", "Vitórias (1 mês)"),
+    c("scoreP1", "Contributo (1 mês)"),
+    c("rankP1", "Posição (1 mês)"),
+    c("winsP2", "Vitórias (2 meses)"),
+    c("scoreP2", "Contributo (2 meses)"),
+    c("rankP2", "Posição (2 meses)"),
+    c("winsP3", "Vitórias (3 meses)"),
+    c("scoreP3", "Contributo (3 meses)"),
+    c("rankP3", "Posição (3 meses)"),
+    c("allWins", "Vitórias (total)"),
+    c("allScore", "Contributo (total)"),
+    c("allRank", "Posição (total)")
 )
 
 
