@@ -79,7 +79,7 @@ h1 {
   line-height: 1.7em;
   margin-bottom: 15px;
   text-align: center;
-  color: darkslategrey;
+  color: darkslategray;
 }
 
 h2 { 
@@ -97,7 +97,7 @@ h5 {
   font-weight: bold;
   font-size: 1.0em;
   line-height: 1.7em;
-  margin-bottom: 1px;
+  margin-bottom: 3px;
   text-align: left;
   color: darkred;
 }
@@ -114,6 +114,7 @@ h5 {
 #warStats, #playerStats, #warMap, #playerEvolution {
   margin: 1 auto;
   font-size: 1.0em;
+  margin-top: 5px;
   margin-bottom: 15px;
 }
 
@@ -123,14 +124,15 @@ h5 {
 
 #warStats thead tr th, #playerStats thead tr th, #warMap thead tr th, #playerEvolution thead tr th { 
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 1.0em;
   vertical-align: middle;
-  padding: 12px 25px 12px 25px; /* top right bottom left */
+  padding: 12px 20px 12px 20px; /* top right bottom left */
   background-repeat: no-repeat;
   background-position: right center;
-  color: darkblue;
-  background: #acc8dd;
+  color: white;
+  background: #6c7ae0;
 }
+
 
 #warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
 #playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown,
@@ -154,13 +156,13 @@ h5 {
 }
 
 #warStats tbody tr.even, #playerStats tbody tr.even, #warMap tbody tr.even, #playerEvolution tbody tr.even { 
-  color: #555;
+  color: #8695b0;
   background: #fff;
 }
 
 #warStats tbody tr.odd, #playerStats tbody tr.odd, #warMap tbody tr.odd, #playerEvolution tbody tr.odd {
-  color: #555;
-  background: rgb(250, 250, 250);
+  color: #8695b0;
+  background: #f8f6ff;
 }
 
 #warStats tbody tr:hover, #playerStats tbody tr:hover, #warMap tbody tr:hover, #playerEvolution tbody tr:hover {

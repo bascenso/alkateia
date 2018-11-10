@@ -1,20 +1,26 @@
 ##
 ## My Tokens
+## Work:
 ## eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA
 ## Allowed IP: 95.92.69.117
 ##
+## Home #1:
 ## eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjI4Njc3ODY1LTYyOGUtNDlmYy1hM2ZlLTI4MGY0ODNiNDc1YiIsImlhdCI6MTU0MDIyNDUzNSwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxODguMzcuMTQ4LjEyIl0sInR5cGUiOiJjbGllbnQifV19.ODcsrHxaptKU9fEAiEYluslCT0oV5n2Zc0zc0mYwvPm1misjr7tPQAEnVoSRFn8yuE7abCMht77NYE3cd7bykg
 ## Allowed IP: 188.37.148.12
+##
+## Home #2:
+## eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImUwNGY4MWYwLWI2NmItNDBmZC1hNWQ3LTZlY2IyYTQ3ZTRkZSIsImlhdCI6MTU0MTg1MDMwNCwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNDguNzEuNTguMTUiXSwidHlwZSI6ImNsaWVudCJ9XX0.CTaTquSwqpz5vDaPmMHWItFdaRisB-BUvTEae_k44NvgAOgHTwJ1mkwzjlpLw4Emv2hL_YbglTrlzWWK9NqdtQ
+## Allowed IP: 148.71.58.15
 ##
 ## curl -X GET --header 'Accept: application/json' --header "authorization: Bearer <API token>" 'https://api.clashroyale.com/v1/tournaments'
 ## curl -X GET --header 'Accept: application/json' --header "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA" 'https://api.clashroyale.com/v1/players/%232UVYQPG2J'
 ## 
 
 #Home token
-#token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjI4Njc3ODY1LTYyOGUtNDlmYy1hM2ZlLTI4MGY0ODNiNDc1YiIsImlhdCI6MTU0MDIyNDUzNSwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxODguMzcuMTQ4LjEyIl0sInR5cGUiOiJjbGllbnQifV19.ODcsrHxaptKU9fEAiEYluslCT0oV5n2Zc0zc0mYwvPm1misjr7tPQAEnVoSRFn8yuE7abCMht77NYE3cd7bykg"
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImUwNGY4MWYwLWI2NmItNDBmZC1hNWQ3LTZlY2IyYTQ3ZTRkZSIsImlhdCI6MTU0MTg1MDMwNCwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNDguNzEuNTguMTUiXSwidHlwZSI6ImNsaWVudCJ9XX0.CTaTquSwqpz5vDaPmMHWItFdaRisB-BUvTEae_k44NvgAOgHTwJ1mkwzjlpLw4Emv2hL_YbglTrlzWWK9NqdtQ"
 
 #Office token
-token <- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
+#token <- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFiYWIzODkxLWQ4M2QtNDgwMC1hNzVhLTVlYWNhYzc3ZDBmOSIsImlhdCI6MTUzODQ5NzM3Niwic3ViIjoiZGV2ZWxvcGVyL2M4ZDc4NGY5LWY0MDUtOTg5NC1mMjBiLTg3NGVhYzlhNzlmZSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI5NS45Mi42OS4xMTciXSwidHlwZSI6ImNsaWVudCJ9XX0.EXORF-G5oyfpzvaRRLoBOw1SnYo-YfFlGnS5H8tKQwXwQhtDm1Cc12PeUcpno8hd2R4PanJdNLJF1dRuKQ0HXA"
 
 myplayertag <- "/%232UVYQPG2J"
 myclantag <- "/%23PG8VC9V"
@@ -32,7 +38,7 @@ statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
 
 ## Pretty names for clan stats columns
 clanCols <- list(
-    c("tag", "tag"),
+    c("tag", "Tag"),
     c("name", "Nome"),
     c("currentMember", "Membro?"),
     c("warsEntered", "Guerras"),
@@ -64,18 +70,18 @@ clanCols <- list(
     c("WARSCORE", "Contributo para o clã"),
     c("joined", "Data entrada"), 
     c("age", "Dias no clã"),
-    c("winsP1", "Vitórias (1 mês)"),
-    c("scoreP1", "Contributo (1 mês)"),
-    c("rankP1", "Posição (1 mês)"),
-    c("winsP2", "Vitórias (2 meses)"),
-    c("scoreP2", "Contributo (2 meses)"),
-    c("rankP2", "Posição (2 meses)"),
-    c("winsP3", "Vitórias (3 meses)"),
-    c("scoreP3", "Contributo (3 meses)"),
-    c("rankP3", "Posição (3 meses)"),
-    c("allWins", "Vitórias (total)"),
-    c("allScore", "Contributo (total)"),
-    c("allRank", "Posição (total)")
+    c("winsP1", "Vitórias - 1 mês"),
+    c("scoreP1", "Contributo - 1 mês"),
+    c("rankP1", "Posição - 1 mês"),
+    c("winsP2", "Vitórias - 2 meses"),
+    c("scoreP2", "Contributo - 2 meses"),
+    c("rankP2", "Posição - 2 meses"),
+    c("winsP3", "Vitórias - 3 meses"),
+    c("scoreP3", "Contributo - 3 meses"),
+    c("rankP3", "Posição - 3 meses"),
+    c("allWins", "Vitórias - total"),
+    c("allScore", "Contributo - total"),
+    c("allRank", "Posição - total")
 )
 
 

@@ -3,7 +3,7 @@ $(function(){
     $("div#warStatsTable").load("data/warstats.html", sortWarStats);
     $("div#playerStatsTable").load("data/playerstats.html", sortPlayerStats);
     $("div#warMapTable").load("data/warmap.html", sortWarMap);
-    $("div#playerEvolutionTable").load("data/evolution.html", sortPlayerEvolution);
+    $("div#playerEvolutionTable").load("data/playerevolution.html", sortPlayerEvolution);
 
     function sortWarStats() {
         $('#warStats').tablesorter({

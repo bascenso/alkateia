@@ -120,7 +120,7 @@ buildHTMLTable <- function (tName, statsTable, useImages = FALSE) {
         
         for (j in 1:ncol(statsTable)) { # for each cell
             
-            if (j == 1) { # first cell with class = lalign
+            if (j == 1 || names(statsTable[j]) == "name") { # first cell with class = lalign
                 cellData <- paste("<td class='lalign'>", statsTable[i, j], "</td>", sep = "")
                 
             } else if (is.na(statsTable[i, j])) {
