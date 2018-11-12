@@ -7,30 +7,33 @@ $(function(){
 
     function sortWarStats() {
         $('#warStats').tablesorter({
-          widgets: ['zebra'],
-          widgetZebra: { css: ['odd', 'even' ] }
+            sortInitialOrder: "desc",
+            widgets: ['zebra'],
+            widgetZebra: { css: ['odd', 'even' ] }
         }); 
     }
     
     function sortPlayerStats() {
         $('#playerStats').tablesorter({
-          widgets: ['zebra'],
-          widgetZebra: { css: ['odd', 'even' ] }
+            sortInitialOrder: "desc",
+            widgets: ['zebra'],
+            widgetZebra: { css: ['odd', 'even' ] }
         }); 
     }
     
     function sortWarMap() {
         $('#warMap').tablesorter({
-          widgets: ['zebra'],
-          widgetZebra: { css: ['odd', 'even' ] }
+            sortInitialOrder: "desc",
+            widgets: ['zebra'],
+            widgetZebra: { css: ['odd', 'even' ] }
         });
     }
     
     function sortPlayerEvolution() {
         $('#playerEvolution').tablesorter({
-          widgets: ['zebra'],
-          widgetZebra: { css: ['odd', 'even' ] }
+            sortInitialOrder: "desc",
+            widgets: ['zebra'],
+            widgetZebra: { css: ['odd', 'even' ] }
         }); 
     }
-      
 });
