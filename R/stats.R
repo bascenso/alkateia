@@ -85,11 +85,22 @@ buildWarStats <- function(warlogDF, membersDF, detailedMembersDF, nwars = "all")
     
     statsDF$name <- rep(NA, nrow(statsDF))
     
+    # Match first the names in the membersDF to ensure current names
     for (i in 1:nrow(statsDF)) {
         player <- as.character(statsDF$tag[i])
-        occ <- match(player, wars$tag)
-        statsDF$name[i] <- as.character(wars$name[occ])
+        occ <- match(player, membersDF$tag)
+        statsDF$name[i] <- as.character(membersDF$name[occ])
     }
+    
+    # For players not in the clan, match their name in the warlog
+    for (i in 1:nrow(statsDF)) {
+        if (is.na(statsDF$name[i])) {
+            player <- as.character(statsDF$tag[i])
+            occ <- match(player, wars$tag)
+            statsDF$name[i] <- as.character(wars$name[occ])
+        }
+    }
+    
     
     # Add number of participations in wars for each member
     participations <- data.frame(table(unlist(wars$tag)))
@@ -263,11 +274,11 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
     if (!file.exists(playerFile)) return (detailedMembersDF)
     
     playerInfo <- readRDS(playerFile)
-    
+
     detailedMembersDF <- merge(detailedMembersDF, playerInfo[, c("tag", "joined")], by.x = "tag", by.y = "tag", all.x = T, all.y = F)
-    
+
     newMembers <- detailedMembersDF[is.na(detailedMembersDF$joined), ]
-    
+
     # If new members exist, set their join date to today and save new file
     if (nrow(newMembers) > 0) {
         newMembers$joined <- Sys.Date()
