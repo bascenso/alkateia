@@ -12,6 +12,7 @@ source("players.R", encoding = "utf-8")
 source("stats.R", encoding = "utf-8")
 source("dumpTables.R", encoding = "utf-8")
 
+options("stringsAsFactors" = FALSE)
 
 ## ================ Get my clan member list
 message("Loading clan member list...")

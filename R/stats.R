@@ -70,7 +70,6 @@ buildWarStats <- function(warlogDF, membersDF, detailedMembersDF, nwars = "all")
         warDates <- warDates[1:nwars]
         
         wars <- warlogDF[warlogDF$warId %in% warDates, ]
-        wars$tag <- droplevels(wars$tag)
     }
 
     # Get the battle totals per player
@@ -279,16 +278,30 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
 
     newMembers <- detailedMembersDF[is.na(detailedMembersDF$joined), ]
 
-    # If new members exist, set their join date to today and save new file
+    # If new members exist, set their join date to today
     if (nrow(newMembers) > 0) {
         newMembers$joined <- Sys.Date()
         playerInfo <- rbind(playerInfo, newMembers[, c("tag", "name", "joined")])
-        saveRDS(playerInfo, playerFile)
         
         for (i in 1:nrow(newMembers)) {
             detailedMembersDF[detailedMembersDF$tag == newMembers[i, "tag"], ]$joined <- Sys.Date()
         }
     }
+
+    # If any member changed its name, set the new name
+    for (i in 1:nrow(detailedMembersDF)) {
+        playerTag <- detailedMembersDF$tag[i]
+        newname <- detailedMembersDF$name[i]
+        
+        oldname <- playerInfo[playerInfo$tag == playerTag, "name"]
+        
+        if (newname != oldname)
+            playerInfo[playerInfo$tag == playerTag, "name"] <- newname
+        
+    }
+    
+    # Save the new data (name changes and new joins)
+    saveRDS(playerInfo, playerFile)
     
     #compute age as nr. days from joined date to today
     detailedMembersDF$age <- as.numeric(Sys.Date() - detailedMembersDF$joined)
@@ -324,9 +337,8 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
         warDates <- warDates[order(unique(warlogDF$warEnd), decreasing = TRUE)]
         warDates <- warDates[1:nwars]
 
-        # subset the most recent wars and drop unused levels from factor
+        # subset the most recent wars
         wars <- warlogDF[warlogDF$warId %in% warDates, ]
-        wars$tag <- droplevels(wars$tag)
     }
 
     # Cast the warlog DF to have the participation per war (only for current members)
@@ -353,10 +365,6 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
     ## Initialize temporary DF to bind the members with no wars
     tempDF <- warParticipationDF[1:nrow(membersWithNoWars), ]
     for(i in 1:nrow(tempDF)) for(j in 3:ncol(tempDF)) tempDF[i, j] <- "MIA"
-    
-    ## Add factor levels with the members with no wars
-    levels(tempDF$tag) <- c(levels(tempDF$tag), as.character(membersWithNoWars$tag))
-    levels(tempDF$name) <- c(levels(tempDF$name), as.character(membersWithNoWars$name))
     
     for(i in 1:nrow(membersWithNoWars)) {
         tempDF[i, ]$tag <- membersWithNoWars[i, ]$tag
