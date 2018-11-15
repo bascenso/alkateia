@@ -23,7 +23,7 @@ $(function(){
     
     function sortWarMap() {
         $('#warMap').tablesorter({
-            sortInitialOrder: "desc",
+            sortInitialOrder: "asc",
             widgets: ['zebra'],
             widgetZebra: { css: ['odd', 'even' ] }
         });
