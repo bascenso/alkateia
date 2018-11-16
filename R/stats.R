@@ -341,14 +341,21 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
         wars <- warlogDF[warlogDF$warId %in% warDates, ]
     }
 
-    # Cast the warlog DF to have the participation per war (only for current members)
+    # Cast the warlogDF to have the participation per war (only for current members)
     onlyCurrentMembersDF <- wars[wars$tag %in% detailedMembersDF$tag, ]
     warParticipationDF <- dcast(data = onlyCurrentMembersDF, 
-                                formula = tag + name ~ as.character(as.Date(onlyCurrentMembersDF$warEnd)), 
+                                formula = tag ~ as.character(as.Date(onlyCurrentMembersDF$warEnd)), 
                                 value.var = "wins", 
                                 fill = "MIA")
 
-    # Reorder columns from most recent to oldest... is there a better way to do this?
+
+    # Add member names to the DF. This can't be included in the dcast() above because some members change names and would appear twice
+    warParticipationDF$name <- sapply(warParticipationDF$tag, function(x) detailedMembersDF[detailedMembersDF$tag == x, "name"])
+
+    # Reorder columns: names as the second column
+    warParticipationDF <- warParticipationDF[, c(1, ncol(warParticipationDF), 2:(ncol(warParticipationDF)-1))]
+
+    # Reorder columns: from most recent to oldest... is there a better way to do this?
     warParticipationDF <- warParticipationDF[, c(1, 2, 2 + order(names(warParticipationDF)[3:ncol(warParticipationDF)], decreasing = T))]
     
     # Add battle misses
@@ -391,7 +398,7 @@ buildWarMap <- function(warlogDF, detailedMembersDF, nwars = "all") {
         }
     }
 
-    
-    warParticipationDF
+    #Return the DF ordered by name
+    warParticipationDF[order(warParticipationDF$name), ]
 
 }

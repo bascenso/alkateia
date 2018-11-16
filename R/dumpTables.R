@@ -38,18 +38,18 @@ dumpTables <- function(tableList, tableNames, dataFolder) {
 # Test: dumpHTMLFile(c("warMap"), list(warParticipationDF), dataPath, c(TRUE))
 
 ## ===========================================================================================================
-## Function dumpHTMLFile(tNames, tList, location, useImages) - dumps the tables as HTML files
+## Function dumpHTMLFile(tNames, tList, useImages, locationFolder) - dumps the tables as HTML files
 ##      tNames - list of tables names to use in file names
 ##      tList - list of DFs with the data (must have the same order as the names)
 ##      useImages - list of TRUE/FALSE indicating wheather to use images or not for the table
-##      location - folder to write the output files
+##      locationFolder - folder to write the output files
 ##
 ## Dumps a list of tables to HTML files
 
-dumpHTMLFile <- function(tNames, tList, useImages, location) {
+dumpHTMLFile <- function(tNames, tList, useImages, locationFolder) {
 
-    if (!file.exists(location)) {
-        warning(paste(location, ":: Location not found."))
+    if (!file.exists(locationFolder)) {
+        warning(paste(locationFolder, ":: Folder not found."))
         return("")
     }
     
@@ -63,7 +63,7 @@ dumpHTMLFile <- function(tNames, tList, useImages, location) {
         htmlCode <- buildHTMLTable(tNames[i], tList[[i]], useImages[i])
     
         # Write output file
-        outFile <- paste(location, "/", tolower(tNames[i]), ".html", sep = "")
+        outFile <- paste(locationFolder, "/", tolower(tNames[i]), ".html", sep = "")
         con <- file(outFile, open = "w")
 
         writeLines(htmlCode, con, useBytes = T)
@@ -71,9 +71,9 @@ dumpHTMLFile <- function(tNames, tList, useImages, location) {
     }
     
     # Write date to file
-    outFile <- paste(location, "/", "lastupdate.html", sep = "")
+    outFile <- paste(locationFolder, "/", "lastupdate.html", sep = "")
     con <- file(outFile, open = "w", encoding = "UTF-8")
-    writeLines(paste("<h5>Actualização de dados: ", Sys.time(), "<h5>",sep = ""), con)
+    writeLines(paste("<h5>Actualização de dados: ", format(Sys.time(), "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
     close(con)
     
     i
