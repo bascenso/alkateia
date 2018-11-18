@@ -67,7 +67,7 @@ result <- dumpHTMLFile(
         list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
              detailedMembersDF, 
              warParticipationDF[, names(warParticipationDF) != "tag"],
-             evolutionDF),
+             evolutionDF[, names(evolutionDF) != "tag"]),
         c(FALSE, FALSE, TRUE, FALSE),
         dataPath
 )
@@ -86,6 +86,6 @@ allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 
 
-write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
-write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
+#write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
+#write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
 
