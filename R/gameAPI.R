@@ -147,56 +147,50 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
 
 
 ## ===========================================================================================================
-## Function getClanMemberDetails(clanTag, token)
-##      clanTag - the tag of the clan
+## Function getClanMemberDetails(members, token)
+##      members - vector with member tags
 ##      token - auth token
 
-getClanMemberDetails <- function(clanTag, token) {
-    APIURL <- paste(APIEndpoint, clanpath, clanTag, sep = "")
+getClanMemberDetails <- function(members, token) {
 
-    clanReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
-
-    if (clanReq$status_code != 200) {
-        stop(paste("Server returned error:", clanReq$status_code))
-    } else {
-        clanInfo <- content(clanReq)
- 
-        memberInfoDF <- data.frame()
-        numMembers <- length(clanInfo$memberList)
-
-        cat(numMembers, "members to get. Let's go...\n")
+    if ((length(members) < 1) || (length(members) > 50))
+        stop("Clan member list should have between 1 and 50 tags.")
+    
+    numMembers <- length(members)
+    memberInfoDF <- data.frame()
+    
+    cat(numMembers, "members to get. Let's go...\n")
+    
+    for (i in 1:numMembers) {
+        cat(i, "..")
         
-        for (i in 1:numMembers) {
-            cat(i, "..")
-            
-            iMember <- getPlayerInfo(sub("#", "/%23", clanInfo$memberList[[i]]$tag), token)
+        iMember <- getPlayerInfo(sub("#", "/%23", members[i]), token)
 
-            memberInfoDF <- rbind(memberInfoDF, data.frame(
-                tag = iMember$tag,
-                name = iMember$name,
-                expLevel = iMember$expLevel,
-                trophies = iMember$trophies,
-                bestTrophies = iMember$bestTrophies,
-                totalWins = iMember$wins,
-                totalLosses = iMember$losses,
-                battleCount = iMember$battleCount,
-                threeCrownWins = iMember$threeCrownWins,
-                challengeCardsWon = iMember$challengeCardsWon,
-                challengeMaxWins = iMember$challengeMaxWins,
-                tournamentCardsWon = iMember$tournamentCardsWon,
-                tournamentBattleCount = iMember$tournamentBattleCount,
-                role = iMember$role,
-                donations = iMember$donations,
-                donationsReceived = iMember$donationsReceived,
-                totalDonations = iMember$totalDonations,
-                warDayWins = iMember$warDayWins,
-                clanCardsCollected = iMember$clanCardsCollected,
-                arena = iMember$arena$name
-            ))
-
-        }
-        cat("\n")
+        memberInfoDF <- rbind(memberInfoDF, data.frame(
+            tag = iMember$tag,
+            name = iMember$name,
+            expLevel = iMember$expLevel,
+            trophies = iMember$trophies,
+            bestTrophies = iMember$bestTrophies,
+            totalWins = iMember$wins,
+            totalLosses = iMember$losses,
+            battleCount = iMember$battleCount,
+            threeCrownWins = iMember$threeCrownWins,
+            challengeCardsWon = iMember$challengeCardsWon,
+            challengeMaxWins = iMember$challengeMaxWins,
+            tournamentCardsWon = iMember$tournamentCardsWon,
+            tournamentBattleCount = iMember$tournamentBattleCount,
+            role = iMember$role,
+            donations = iMember$donations,
+            donationsReceived = iMember$donationsReceived,
+            totalDonations = iMember$totalDonations,
+            warDayWins = iMember$warDayWins,
+            clanCardsCollected = iMember$clanCardsCollected,
+            arena = iMember$arena$name
+        ))
+        
     }
+    cat("\n")
     
     memberInfoDF
 }

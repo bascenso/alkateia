@@ -23,9 +23,9 @@ options("stringsAsFactors" = FALSE)
 message("Loading clan member list...")
 membersDF <- getClanMembers(myclantag, token)
 
-# Get detailed member info
+# Get detailed clan member info
 message("Loading detailed member info...")
-detailedMembersDF <- getClanMemberDetails(myclantag, token)
+detailedMembersDF <- getClanMemberDetails(membersDF$tag, token)
 
 # Get clan warlog and append to file
 message("Loading war log...")
