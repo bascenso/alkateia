@@ -1,6 +1,12 @@
 ## ===========================================================================================================
-## Functions to get clan data
-## Syntax:
+## Functions to get data from the game API
+##
+## Player data Syntax:
+## GET /players/{playerTag} : Get player information
+## GET /players/{playerTag}/upcomingchests : Get list of reward chests that the player will receive next in the game
+## GET /players/{playerTag}/battlelog : Get list of recent battle results for a player.
+##
+## Clan data Syntax:
 ## GET /clans : Search all clans by name
 ## GET /clans/{clanTag} : Get information about a single clan by clan tag
 ## GET /clans/{clanTag}/members : List clan members
@@ -8,14 +14,44 @@
 ## GET /clans/{clanTag}/currentwar : Retrieve information about clan's current clan war
 
 
-##
 ## Addresses
 ##
 APIEndpoint <- "https://api.clashroyale.com/v1"
+
+## Player data
+playerpath = "/players"
+chestspath = "/upcomingchests"
+battlepath = "/battlelog"
+
+## Clan data
 clanpath <- "/clans"
 memberpath <- "/members"
 warlogpath <- "/warlog"
 currentwarpath <- "/currentwar"
+
+
+
+## ===========================================================================================================
+## Function getPlayerInfo(playerTag, token)
+##      playerTag - the tag of the player
+##      token - auth token
+
+getPlayerInfo <- function(playerTag, token) {
+    APIURL <- paste(APIEndpoint, playerpath, playerTag, sep = "")
+    
+    playerReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
+    
+    if (playerReq$status_code != 200) {
+        stop(paste("Server returned error:", warlogReq$status_code))
+        
+    } else {
+        playerInfo <- content(playerReq)
+        
+    }
+    
+    playerInfo
+}
+
 
 
 ## ===========================================================================================================

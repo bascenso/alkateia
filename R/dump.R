@@ -1,3 +1,21 @@
+#
+#' function storeLastUpdate() - writes the current date to the lastupdate file
+#' 
+#' @param locationFolder folder to place the file
+#'
+storeLastUpdate <- function(locationFolder) {
+    
+    outFile <- paste(locationFolder, "/", "lastupdate.html", sep = "")
+    con <- file(outFile, open = "w", encoding = "UTF-8")
+    
+    writeLines(paste("<h5>Última actualização de dados: ", format(Sys.time(), "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
+    
+    close(con)
+    
+    TRUE
+}
+
+
 ## ===========================================================================================================
 ## Function dumpTables(tableList, tableNames, dataFolder)
 ##      tableList - list of data frames to dump to file
@@ -34,9 +52,6 @@ dumpTables <- function(tableList, tableNames, dataFolder) {
     i    
 }
 
-
-# Test: dumpHTMLFile(c("warMap"), list(warParticipationDF), dataPath, c(TRUE))
-
 ## ===========================================================================================================
 ## Function dumpHTMLFile(tNames, tList, useImages, locationFolder) - dumps the tables as HTML files
 ##      tNames - list of tables names to use in file names
@@ -70,15 +85,8 @@ dumpHTMLFile <- function(tNames, tList, useImages, locationFolder) {
         close(con)
     }
     
-    # Write date to file
-    outFile <- paste(locationFolder, "/", "lastupdate.html", sep = "")
-    con <- file(outFile, open = "w", encoding = "UTF-8")
-    writeLines(paste("<h5>Actualização de dados: ", format(Sys.time(), "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
-    close(con)
-    
     i
 }
-
 
 ## ===========================================================================================================
 ## Function buildHTMLTable(statsTable) - builds the HTML table string
@@ -147,7 +155,12 @@ buildHTMLTable <- function (tName, statsTable, useImages = FALSE) {
 
 
 
-
+#' Function getImage() - returns the correct image for each result in the war
+#' 
+#' @param value result of the player in the war. May be {MIA, -BF, 0, 1, 2}
+#' @return returns the HTML for the correct image
+#' @author Bruno Ascenso
+#' 
 getImage <- function(value) {
     
     retString <- switch(value,

@@ -7,61 +7,65 @@ suppressPackageStartupMessages(library(xlsx))
 suppressPackageStartupMessages(library(reshape2))
 
 source("defs.R", encoding = "utf-8")
-source("clans.R", encoding = "utf-8")
-source("players.R", encoding = "utf-8")
-source("stats.R", encoding = "utf-8")
-source("dumpTables.R", encoding = "utf-8")
+source("gameAPI.R", encoding = "utf-8")
+source("storage.R", encoding = "utf-8")
+source("maps.R", encoding = "utf-8")
+source("dump.R", encoding = "utf-8")
+
+
+## ===========================================================================================================
+## Load clan data
+##
 
 options("stringsAsFactors" = FALSE)
 
-## ================ Get my clan member list
+# Get my clan member list
 message("Loading clan member list...")
 membersDF <- getClanMembers(myclantag, token)
 
-
-## ================ Get my clan warlog and append to file
-message("Loading war log...")
-warlogDF <- getClanWarlog(myclantag, token, warlogFile)
-
-
-## ================ Get detailed member info
+# Get detailed member info
 message("Loading detailed member info...")
 detailedMembersDF <- getClanMemberDetails(myclantag, token)
 
+# Get clan warlog and append to file
+message("Loading war log...")
+warlogDF <- getClanWarlog(myclantag, token, warlogFile)
+
+# Update data retrieval timestamp
+result <- storeLastUpdate(dataPath)
 
 
 ## ===========================================================================================================
-## Update player join dates
+## Store local files
 ##
+
+## Player join dates
 detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
 
-
-## ===========================================================================================================
-## Build war stats
-##
-message("Building stats...")
-statsDF <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
-
-
-## ===========================================================================================================
-## Build war participation map
-##
-warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
-
-
-## ===========================================================================================================
-## Build performance evolution map
-##
-evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod = 3, warsPerPeriod = 15)
-
-
-## ===========================================================================================================
-## Create a new entry with the clan stats
-##
+## Clan stats
 clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)
 
 
-## Build HTML table files
+
+## ===========================================================================================================
+## Build stats
+##
+message("Building stats...")
+
+## War stats
+statsDF <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
+
+## War participation map
+warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
+
+## Performance evolution map
+evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod = 3, warsPerPeriod = 15)
+
+
+
+## ===========================================================================================================
+## Generate HTML table files
+##
 result <- dumpHTMLFile(
         c("warStats", "playerStats", "warMap", "playerEvolution"),
         list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
@@ -86,6 +90,6 @@ allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 
 
-#write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
-#write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
+write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
+write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
 
