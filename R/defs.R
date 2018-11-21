@@ -42,6 +42,7 @@ clanCols <- list(
     c("name", "Nome"),
     c("currentMember", "Membro?"),
     c("warsEntered", "Guerras"),
+    c("pctLastPeriod", "% último mês"),
     c("collectionDayBattlesPlayed", "Batalhas Colecta"),
     c("cardsEarned", "Cartas ganhas"),
     c("battlesPlayed", "Batalhas finais"),

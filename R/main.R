@@ -13,54 +13,31 @@ source("maps.R", encoding = "utf-8")
 source("dump.R", encoding = "utf-8")
 
 
-## ===========================================================================================================
-## Load clan data
-##
 
+## ===========================================================================================================
+## Get clan data and build stats
+##
 options("stringsAsFactors" = FALSE)
 
-# Get my clan member list
-message("Loading clan member list...")
-membersDF <- getClanMembers(myclantag, token)
 
-# Get detailed clan member info
-message("Loading detailed member info...")
-detailedMembersDF <- getClanMemberDetails(membersDF$tag, token)
+clan <- list(tag = myclantag, name = "Alkateia PT")
 
-# Get clan warlog and append to file
-message("Loading war log...")
-warlogDF <- getClanWarlog(myclantag, token, warlogFile)
+clan$members <- getClanMembers(clan$tag, token)
+clan$memberInfo <- getClanMemberDetails(clan$members$tag, token)
+clan$warlog <- getClanWarlog(clan$tag, token, warlogFile)
+clan$lastupdate <- Sys.time()
 
-# Update data retrieval timestamp
-result <- storeLastUpdate(dataPath)
+clan$memberInfo <- updateJoinDates(clan$memberInfo, playerFile)
+clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 
+clan$warStats <- buildWarStats(clan, "all")
 
-## ===========================================================================================================
-## Store local files
-##
-
-## Player join dates
-detailedMembersDF <- updateJoinDates(detailedMembersDF, playerFile)
-
-## Clan stats
-clanStatsDF <- logClanStats(detailedMembersDF, clanStatsFile)
-
-
-
-## ===========================================================================================================
-## Build stats
-##
-message("Building stats...")
-
-## War stats
-statsDF <- buildWarStats(warlogDF, membersDF, detailedMembersDF, "all")
 
 ## War participation map
-warParticipationDF <- buildWarMap(warlogDF, detailedMembersDF, nwars = "all")
+warParticipationDF <- buildWarMap(clan, nwars = "all")
 
 ## Performance evolution map
-evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod = 3, warsPerPeriod = 15)
-
+evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 
 
 ## ===========================================================================================================
@@ -68,28 +45,32 @@ evolutionDF <- buildEvolutionMap(warlogDF, membersDF, detailedMembersDF, nperiod
 ##
 result <- dumpHTMLFile(
         c("warStats", "playerStats", "warMap", "playerEvolution"),
-        list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
-             detailedMembersDF, 
-             warParticipationDF[, names(warParticipationDF) != "tag"],
-             evolutionDF[, names(evolutionDF) != "tag"]),
+        list(
+            clan$warStats[(clan$warStats$currentMember == "Yes"), !(names(clan$warStats) %in% c("tag", "currentMember"))], 
+            clan$memberInfo, 
+            warParticipationDF[, names(warParticipationDF) != "tag"],
+            evolutionDF[, names(evolutionDF) != "tag"]
+        ),
         c(FALSE, FALSE, TRUE, FALSE),
         dataPath
 )
 
+result <- storeLastUpdate(clan, dataPath)
+
+
 
 ## Dump tables to file
-result <- dumpTables(list(statsDF[(statsDF$currentMember == "Yes"), !(names(statsDF) %in% c("tag", "currentMember"))], 
-                          detailedMembersDF, 
+result <- dumpTables(list(clan$warStats[(clan$warStats$currentMember == "Yes"), !(names(clan$warStats) %in% c("tag", "currentMember"))], 
+                          clan$memberInfo,
                           warParticipationDF[, names(warParticipationDF) != "tag"]),
                      c("warstats", "memberstats", "warmap"), dataPath)
 
 
 ## Merge all player stats (war and individual), and save to XLXS file
-allStatsDF <- merge(statsDF, detailedMembersDF, by.x = "tag", by.y = "tag", all.x = TRUE)
+allStatsDF <- merge(clan$warStats, clan$memberInfo, by.x = "tag", by.y = "tag", all.x = TRUE)
 allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 
 
 write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
 write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
-

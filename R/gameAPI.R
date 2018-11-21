@@ -60,6 +60,9 @@ getPlayerInfo <- function(playerTag, token) {
 ##      token - auth token
 
 getClanMembers <- function(clanTag, token) {
+
+    cat("Getting clan members for", clanTag, "... ")
+    
     APIURL <- paste(APIEndpoint, clanpath, clanTag, sep = "")
 
     clanReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
@@ -89,6 +92,8 @@ getClanMembers <- function(clanTag, token) {
         }
     }
 
+    cat("OK\n")
+    
     membersDF
 }
 
@@ -100,6 +105,9 @@ getClanMembers <- function(clanTag, token) {
 ##      fileName - if specified, append warlog data to this file (RDS format)
 
 getClanWarlog <- function (clanTag, token, fileName = "") {
+
+    cat("Getting warlog for", clanTag, "... ")
+    
     APIURL <- paste(APIEndpoint, clanpath, clanTag, warlogpath, sep = "")
 
     warlogReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
@@ -142,6 +150,8 @@ getClanWarlog <- function (clanTag, token, fileName = "") {
         if (fileName != "") saveRDS(warlogDF, fileName)
     }
 
+    cat("OK\n")
+    
     warlogDF
 }
 
@@ -159,8 +169,8 @@ getClanMemberDetails <- function(members, token) {
     numMembers <- length(members)
     memberInfoDF <- data.frame()
     
-    cat(numMembers, "members to get. Let's go...\n")
-    
+    cat("Getting members (", numMembers, "):\n", sep = "")
+
     for (i in 1:numMembers) {
         cat(i, "..")
         
@@ -190,7 +200,8 @@ getClanMemberDetails <- function(members, token) {
         ))
         
     }
-    cat("\n")
+
+    cat("OK\n")
     
     memberInfoDF
 }

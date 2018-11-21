@@ -3,12 +3,12 @@
 #' 
 #' @param locationFolder folder to place the file
 #'
-storeLastUpdate <- function(locationFolder) {
-    
+storeLastUpdate <- function(cl, locationFolder) {
+
     outFile <- paste(locationFolder, "/", "lastupdate.html", sep = "")
     con <- file(outFile, open = "w", encoding = "UTF-8")
-    
-    writeLines(paste("<h5>Última actualização de dados: ", format(Sys.time(), "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
+
+    writeLines(paste("<h5>Última actualização de dados: ", format(cl$lastupdate, "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
     
     close(con)
     
@@ -84,7 +84,7 @@ dumpHTMLFile <- function(tNames, tList, useImages, locationFolder) {
         writeLines(htmlCode, con, useBytes = T)
         close(con)
     }
-    
+
     i
 }
 
@@ -166,9 +166,9 @@ getImage <- function(value) {
     retString <- switch(value,
                         "MIA" = paste("<td class ='valueMIA'>", value, "</td>", sep = ""),
                         "-BF" = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-miss.png'>", "</td>", sep = ""),
-                        "0"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-loss.png'>", "</td>", sep = ""),
-                        "1"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
-                        "2"   = paste("<td class ='valueBF'>", "<img class='warIcon' src='img/cw-war-win.png'><img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+                        "0"   = paste("<td>", "<img class='warIcon' src='img/cw-war-loss.png'>", "</td>", sep = ""),
+                        "1"   = paste("<td>", "<img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
+                        "2"   = paste("<td>", "<img class='warIcon' src='img/cw-war-win.png'><img class='warIcon' src='img/cw-war-win.png'>", "</td>", sep = ""),
                         paste("<td>", value, "</td>", sep = "")
     )
     retString
