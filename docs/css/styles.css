@@ -25,11 +25,11 @@ html {
 }
 
 body { 
-  background: #eee;
+  background: #333;
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 80%;
   line-height: 1;
-  color: #585858;
+  color: darkslategrey;
   padding: 20px 10px 50px 10px;
 }
 
@@ -89,7 +89,7 @@ h1 {
   line-height: 1.7em;
   margin-bottom: 15px;
   text-align: center;
-  color: darkslategray;
+  color: white;
 }
 
 h2 {
@@ -102,13 +102,25 @@ h2 {
   color: darkslategrey;
 }
 
+h4 {
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  line-height: 1.7em;
+  margin-bottom: 5px;
+  text-align: left;
+  text-decoration: underline;
+  color: rgb(218, 213, 213);
+}
+
 h5 {
   font-family: Tahoma, sans-serif;
   font-weight: bold;
   font-size: 1.0em;
   line-height: 1.7em;
-  margin-bottom: 4px;
+  margin: 5px 0px 4px 15px;
   text-align: left;
+  text-decoration: underline;
   color: darkred;
 }
 
@@ -118,6 +130,7 @@ h5 {
   background: #fff;
   /*width: 1000 px;*/
   margin: 0 auto;
+  /* margin-top: 30px;  Avoid content overlay with topnav */
   padding: 15px 12px 20px 12px;
 }
 

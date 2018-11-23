@@ -42,11 +42,46 @@ evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 
 # ============================================================================================================
 # NEW CODE
+.__exclude <- function() {
+    
+    clan$tables <- list()
+    clan$tables[[1]] <- prepareWarstatsTable(clan)
+    names(clan$tables) <- "warstats"
+    
+    
+    prepareWarstatsTable <- function(cl) {
+        
+        removeCols <- c("tag", "currentMember")
+        nwars <- max(cl$warStats$warsEntered)
+        
+        theTable <- cl$warStats[cl$warStats$currentMember == "Yes", !(names(cl$warStats) %in% removeCols)]
+        
+        theTable$pctStatus <- rep("HIGH", nrow(theTable))
+        theTable[theTable$pctLastPeriod < 80, "pctStatus"] <- "MEDIUM"
+        theTable[theTable$pctLastPeriod < 45, "pctStatus"] <- "LOW"
+        
+        for (i in 1:nrow(theTable)) {
+            theTable$imgPct[i] <- switch(theTable$pctStatus[i],
+                                         HIGH = "img/high.png",
+                                         MEDIUM = "img/med.png",
+                                         LOW = "img/low.png")
+        }
+        
+        
+        theTable$scoreStatus <- rep("GREAT", nrow(theTable))
+        theTable[theTable$WARSCORE < 7.5 * nwars, "scoreStatus"] <- "HIGH"
+        theTable[theTable$WARSCORE < 5 * nwars, "scoreStatus"] <- "MEDIUM"
+        theTable[theTable$WARSCORE < 2.5 * nwars, "scoreStatus"] <- "LOW"
+        theTable[theTable$WARSCORE < 0, "scoreStatus"] <- "DANGER"
+        
+        theTable$imgScore <- rep ("", nrow(theTable))
+        for (i in 1:nrow(theTable)) {
+            theTable$imgScore <- NULL
+        }
+    }
 
-
-
+}
 # END NEW CODE
-
 
 
 ## ===========================================================================================================

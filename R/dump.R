@@ -8,7 +8,7 @@ storeLastUpdate <- function(cl, locationFolder) {
     outFile <- paste(locationFolder, "/", "lastupdate.html", sep = "")
     con <- file(outFile, open = "w", encoding = "UTF-8")
 
-    writeLines(paste("<h5>Última actualização de dados: ", format(cl$lastupdate, "%d de %B de %Y, %Hh%M"), "<h5>", sep = ""), con)
+    writeLines(paste("<h4>Última actualização de dados: ", format(cl$lastupdate, "%d de %B de %Y, %Hh%M"), "<h4>", sep = ""), con)
     
     close(con)
     
