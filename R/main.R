@@ -40,6 +40,15 @@ warParticipationDF <- buildWarMap(clan, nwars = "all")
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 
 
+# ============================================================================================================
+# NEW CODE
+
+
+
+# END NEW CODE
+
+
+
 ## ===========================================================================================================
 ## Generate HTML table files
 ##
