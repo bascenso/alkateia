@@ -43,7 +43,7 @@ evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 # ============================================================================================================
 # NEW CODE
 .__exclude <- function() {
-    
+
     clan$tables <- list()
     clan$tables[[1]] <- prepareWarstatsTable(clan)
     names(clan$tables) <- "warstats"
