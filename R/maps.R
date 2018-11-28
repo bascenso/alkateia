@@ -126,7 +126,9 @@ computeRecentWarPresence <- function(statsDF, cl) {
     warDates <- strptime(warDates, "%Y%m%dT%H%M%S.000Z")
     participations$couldEnter <- rep(0, nrow(participations))
 
-    for (i in 1:nrow(participations)) participations$couldEnter[i] <- length(which(warDates > as.Date(participations$joined[i] + 2)))
+    for (i in 1:nrow(participations))
+        participations$couldEnter[i] <- length(which(as.Date(warDates) > as.Date(participations$joined[i] + 2)))
+
     participations$rate <- round(participations$Freq / participations$couldEnter * 100, 0)
 
     # Assign percentage to players in stats DF
@@ -311,19 +313,21 @@ buildWarMap <- function(cl, nwars = "all") {
     # Add members with no wars
     membersWithNoWars <- cl$memberInfo[!(cl$memberInfo$tag %in% warParticipationDF$tag), c("tag", "name")]
 
-    ## Initialize temporary DF to bind the members with no wars
-    tempDF <- warParticipationDF[1:nrow(membersWithNoWars), ]
-    for(i in 1:nrow(tempDF)) for(j in 3:ncol(tempDF)) tempDF[i, j] <- "MIA"
+    if (nrow(membersWithNoWars) > 0) {
 
-    for(i in 1:nrow(membersWithNoWars)) {
-        tempDF[i, ]$tag <- membersWithNoWars[i, ]$tag
-        tempDF[i, ]$name <- membersWithNoWars[i, ]$name
-    }
+        ## Initialize temporary DF to bind the members with no wars
+        tempDF <- warParticipationDF[1:nrow(membersWithNoWars), ]
+        for(i in 1:nrow(tempDF)) for(j in 3:ncol(tempDF)) tempDF[i, j] <- "MIA"
+        
+        for(i in 1:nrow(membersWithNoWars)) {
+            tempDF[i, ]$tag <- membersWithNoWars[i, ]$tag
+            tempDF[i, ]$name <- membersWithNoWars[i, ]$name
+        }
+        
+        ## Bind the tempDF into the the main DF
+        warParticipationDF <- rbind(warParticipationDF, tempDF)
+    }    
     
-    ## Bind the tempDF into the the main DF
-    warParticipationDF <- rbind(warParticipationDF, tempDF)
-    
-
     # Add NA for wars where the member was not yet in the clan
     # For each member and for each battle (date)
     for (iMember in 1:nrow(warParticipationDF)) {
