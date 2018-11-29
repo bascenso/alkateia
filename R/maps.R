@@ -251,7 +251,7 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
                                      - (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
     }
-    
+
     statsDF
 }
 
@@ -287,10 +287,9 @@ buildWarMap <- function(cl, nwars = "all") {
 
     # Cast the warlog DF to have the participation per war (only for current members)
     onlyCurrentMembersDF <- wars[wars$tag %in% cl$memberInfo$tag, ]
-    warParticipationDF <- dcast(data = onlyCurrentMembersDF, 
-                                formula = tag ~ as.character(as.Date(onlyCurrentMembersDF$warEnd)), 
-                                value.var = "wins", 
-                                fill = "MIA")
+    onlyCurrentMembersDF$warEnd <- as.character(as.Date(onlyCurrentMembersDF$warEnd))
+
+    warParticipationDF <- dcast(data = onlyCurrentMembersDF, formula = tag ~ warEnd, value.var = "wins", fill = "MIA")
 
 
     # Add member names to the DF. This can't be included in the dcast() above because some members change names and would appear twice
