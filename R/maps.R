@@ -214,9 +214,9 @@ buildEvolutionMap <- function(cl, nperiod = 3, warsPerPeriod = 15) {
 ## ================ PLAYER SCORE FORMULA:
 ## Score / points added:
 ## - 500 cards earned = 1 point
-## - 1 war day victory = 5 points
+## - 1 war day victory = 6 points
 ## - 1 war day victory (all time) - 0.5 points
-## - 2000 cards collected (all time) - 1 point
+## - 3000 cards collected (all time) - 1 point
 ##
 ## Score / points removed:
 ## - Final battle misses: 10 * misses + 3 ^ misses - 1
@@ -243,9 +243,9 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
         maxWars <- ifelse(memberMaxWars > totalWars, totalWars, memberMaxWars)
         
         statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 500 
-                                     + (statsDF$wins[i] * 5)
+                                     + (statsDF$wins[i] * 6)
                                      + (memberWarDayWins / 2)
-                                     + (memberClanCardsCollected / 2000)
+                                     + (memberClanCardsCollected / 3000)
                                      - (10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1)
                                      - ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
                                      - (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
