@@ -12,7 +12,7 @@ source("storage.R", encoding = "utf-8")
 source("maps.R", encoding = "utf-8")
 source("dump.R", encoding = "utf-8")
 
-
+setwd("c:/users/basce/GitRepos/alkateia/R/")
 
 ## ===========================================================================================================
 ## Get clan data and build stats
