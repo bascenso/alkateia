@@ -139,7 +139,7 @@ h5 {
   border-radius: 8px;
   display: block;
   margin-top: 5px;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 5px 5px 5px;
   width: auto;
   height: auto;
   box-sizing: border-box;
@@ -215,7 +215,7 @@ h5 {
 
 #warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td, #playerEvolution tbody tr td {
   text-align: center;
-  padding: 15px 10px;
+  padding: 15px 8px;
 }
 
 #warStats tbody tr td.lalign, #playerStats tbody tr td.lalign, #warMap tbody tr td.lalign, #playerEvolution tbody tr td.lalign {
