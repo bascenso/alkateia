@@ -40,8 +40,8 @@ warlogFile <- "data/warlog.RDS"
 clanStatsFile <- "data/clanstats.RDS"
 playerFile <- "data/players.RDS"
 
-statsJSONfile <- "C:/Data/GDrive/98.CR/alkateia.json"
-statsXLSfile <- "C:/Data/GDrive/98.CR/alkateia.xlsx"
+statsJSONfile <- "C:/Data/98.CR/alkateia.json"
+statsXLSfile <- "C:/Data/98.CR/alkateia.xlsx"
 
 ## Pretty names for clan stats columns
 clanCols <- list(
