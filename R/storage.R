@@ -81,7 +81,7 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
             playerInfo[playerInfo$tag == playerTag, "name"] <- newname
         
     }
-    
+
     # Save the new data (name changes and new joins)
     saveRDS(playerInfo, playerFile)
     
