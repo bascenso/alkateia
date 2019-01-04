@@ -30,8 +30,9 @@ clan$lastupdate <- Sys.time()
 clan$memberInfo <- updateJoinDates(clan$memberInfo, playerFile)
 clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 
-clan$warStats <- buildWarStats(clan, "all")
 
+## War stats
+clan$warStats <- buildWarStats(clan, "all")
 
 ## War participation map
 warParticipationDF <- buildWarMap(clan, nwars = "all")
