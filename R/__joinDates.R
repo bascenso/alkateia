@@ -61,6 +61,9 @@ playerInfo[playerInfo$name == "YOSHINZ", ]$joined <- as.Date("2018-10-07")
 playerInfo[playerInfo$name == "zau", ]$joined <- as.Date("2018-07-21")
 playerInfo[playerInfo$name == "ZezinhoPT", ]$joined <- as.Date("2018-09-19")
 playerInfo[playerInfo$name == "Jonas 705", ]$joined <- as.Date("2018-10-27")
+playerInfo[playerInfo$name == "metralha", ]$joined <- as.Date("2019-01-08")
+playerInfo[playerInfo$name == "ok", ]$joined <- as.Date("2019-01-10")
+playerInfo[playerInfo$tag == "#88R8GRQUC", ]$joined <- as.Date("2019-01-08")
 
 
 
