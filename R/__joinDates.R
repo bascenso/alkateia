@@ -65,5 +65,16 @@ playerInfo[playerInfo$name == "metralha", ]$joined <- as.Date("2019-01-08")
 playerInfo[playerInfo$name == "ok", ]$joined <- as.Date("2019-01-10")
 playerInfo[playerInfo$tag == "#88R8GRQUC", ]$joined <- as.Date("2019-01-08")
 
+playerInfo[playerInfo$name == "DiDaarc", ]$joined <- as.Date("2019-01-14")
+playerInfo[playerInfo$name == "PedroNabaisHD", ]$joined <- as.Date("2019-01-14")
+playerInfo[playerInfo$name == "nunogsp", ]$joined <- as.Date("2019-01-15")
+playerInfo[playerInfo$name == "San-Nin", ]$joined <- as.Date("2019-01-16")
+playerInfo[playerInfo$name == "Antonio", ]$joined <- as.Date("2019-01-16")
+playerInfo[playerInfo$name == "AlexCarneiro", ]$joined <- as.Date("2019-01-17")
+playerInfo[playerInfo$name == "supercel", ]$joined <- as.Date("2019-01-17")
+playerInfo[playerInfo$name == "Os Irmaos PT", ]$joined <- as.Date("2019-01-18")
+playerInfo[playerInfo$name == "The fats", ]$joined <- as.Date("2019-01-18")
+playerInfo[playerInfo$name == "André", ]$joined <- as.Date("2019-01-18")
+
 
 
