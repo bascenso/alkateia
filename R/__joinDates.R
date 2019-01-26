@@ -76,5 +76,7 @@ playerInfo[playerInfo$name == "Os Irmaos PT", ]$joined <- as.Date("2019-01-18")
 playerInfo[playerInfo$name == "The fats", ]$joined <- as.Date("2019-01-18")
 playerInfo[playerInfo$name == "André", ]$joined <- as.Date("2019-01-18")
 
+playerInfo[playerInfo$name == "Destruidor", ]$joined <- as.Date("2019-01-23")
+playerInfo[playerInfo$name == "Thiago 2", ]$joined <- as.Date("2019-01-20")
 
 

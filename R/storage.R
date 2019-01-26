@@ -79,7 +79,6 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
         
         if (newname != oldname)
             playerInfo[playerInfo$tag == playerTag, "name"] <- newname
-        
     }
 
     # Save the new data (name changes and new joins)
