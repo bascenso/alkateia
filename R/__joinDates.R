@@ -85,6 +85,7 @@ playerInfo[playerInfo$name == "Marshall", ]$joined <- as.Date("2019-01-28")
 playerInfo[playerInfo$name == "Fraldisqueira", ]$joined <- as.Date("2019-01-29")
 playerInfo[playerInfo$name == "MiStErIo", ]$joined <- as.Date("2019-01-29")
 
+playerInfo[playerInfo$name == "virtudes", ]$joined <- as.Date("2019-02-05")
 
 
 

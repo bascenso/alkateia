@@ -172,7 +172,7 @@ getClanMemberDetails <- function(members, token) {
     cat("Getting members (", numMembers, "):\n", sep = "")
 
     for (i in 1:numMembers) {
-        cat(i, "..")
+        cat(i, ". ")
         
         iMember <- getPlayerInfo(sub("#", "/%23", members[i]), token)
 
@@ -201,7 +201,7 @@ getClanMemberDetails <- function(members, token) {
         
     }
 
-    cat("OK\n")
+    cat("\n")
     
     memberInfoDF
 }
