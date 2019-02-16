@@ -91,6 +91,8 @@ cat("OK\n")
 ## ===========================================================================================================
 ## Generate HTML table files
 ##
+cat("Generating files... ")
+
 result <- dumpHTMLFile(
         c("warStats", "playerStats", "warMap", "playerEvolution"),
         list(
@@ -123,3 +125,4 @@ allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
 write.xlsx2(allStatsDF, file = statsXLSfile, sheetName = "Dados", col.names = T, row.names = F, append = F)
 write.xlsx2(t(as.data.frame(descs)), statsXLSfile, sheetName = "Dicionário", col.names = F, row.names = F, append = T)
 
+cat("OK\n")
