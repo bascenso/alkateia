@@ -88,4 +88,15 @@ playerInfo[playerInfo$name == "MiStErIo", ]$joined <- as.Date("2019-01-29")
 playerInfo[playerInfo$name == "virtudes", ]$joined <- as.Date("2019-02-05")
 
 
+playerInfo[playerInfo$name == "the killer zone", ]$joined <- as.Date("2019-02-23")
+playerInfo[playerInfo$name == "sil", ]$joined <- as.Date("2019-02-26")
+playerInfo[playerInfo$name == "RichPath", ]$joined <- as.Date("2019-02-23")
+playerInfo[playerInfo$name == "Soul_Eater", ]$joined <- as.Date("2019-02-23")
+playerInfo[playerInfo$name == "marinheiro", ]$joined <- as.Date("2019-02-23")
+playerInfo[playerInfo$name == "Tiagiovic-RUSSO", ]$joined <- as.Date("2019-02-27")
+
+
+
+
+
 
