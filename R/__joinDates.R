@@ -96,6 +96,11 @@ playerInfo[playerInfo$name == "marinheiro", ]$joined <- as.Date("2019-02-23")
 playerInfo[playerInfo$name == "Tiagiovic-RUSSO", ]$joined <- as.Date("2019-02-27")
 
 
+playerInfo[playerInfo$name == "nmaciel8", ]$joined <- as.Date("2019-03-03")
+playerInfo[playerInfo$name == "JotaPTguna", ]$joined <- as.Date("2019-03-07")
+playerInfo[playerInfo$name == "dr nov4to", ]$joined <- as.Date("2019-03-07")
+playerInfo[playerInfo$name == "LouCo_xD", ]$joined <- as.Date("2019-03-07")
+
 
 
 
