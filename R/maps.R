@@ -282,7 +282,7 @@ buildWarMap <- function(cl, nwars = "all") {
         warDates <- warDates[1:nwars]
 
         # subset the most recent wars
-        wars <- cl$warlogDF[cl$warlog$warId %in% warDates, ]
+        wars <- cl$warlog[cl$warlog$warId %in% warDates, ]
     }
 
     # Cast the warlog DF to have the participation per war (only for current members)

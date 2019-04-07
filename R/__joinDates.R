@@ -104,5 +104,14 @@ playerInfo[playerInfo$name == "LouCo_xD", ]$joined <- as.Date("2019-03-07")
 playerInfo[playerInfo$name == "Pp", ]$joined <- as.Date("2019-03-12")
 
 
+playerInfo[playerInfo$name == "Juca", ]$joined <- as.Date("2019-03-18")
+playerInfo[playerInfo$name == "fogo", ]$joined <- as.Date("2019-03-22")
+
+playerInfo[playerInfo$name == "Tiago", ]$joined <- as.Date("2019-03-25")
+playerInfo[playerInfo$name == "Wannakil", ]$joined <- as.Date("2019-03-27")
+playerInfo[playerInfo$tag == "#9Y288GUC", ]$joined <- as.Date("2019-03-25")
+
+
+
 
 
