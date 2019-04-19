@@ -111,9 +111,9 @@ playerInfo[playerInfo$name == "Tiago", ]$joined <- as.Date("2019-03-25")
 playerInfo[playerInfo$name == "Wannakil", ]$joined <- as.Date("2019-03-27")
 playerInfo[playerInfo$tag == "#9Y288GUC", ]$joined <- as.Date("2019-03-25")
 
-playerInfo[playerInfo$name == "pastore", ]$joined <- as.Date("2019-04-10")
 playerInfo[playerInfo$name == "Muffin3", ]$joined <- as.Date("2019-04-08")
 
+playerInfo[playerInfo$name == "klu$h", ]$joined <- as.Date("2019-04-16")
 
 
 
