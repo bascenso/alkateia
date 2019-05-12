@@ -248,7 +248,7 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
                                      + (memberClanCardsCollected / 5000)
                                      - (10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1)
                                      - ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
-                                     - (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
+                                     #- (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
     }
 
