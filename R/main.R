@@ -34,10 +34,10 @@ clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 ## War stats
 cat("Building stats... ")
 
-clan$warStats <- buildWarStats(clan, nwars = 100)
+clan$warStats <- buildWarStats(clan, nwars = 50)
 
 ## War participation map
-warParticipationDF <- buildWarMap(clan, nwars = 100)
+warParticipationDF <- buildWarMap(clan, nwars = 50)
 
 ## Performance evolution map
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
