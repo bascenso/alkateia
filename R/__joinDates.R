@@ -129,5 +129,11 @@ playerInfo[playerInfo$name == "mp11", ]$joined <- as.Date("2019-07-11")
 
 playerInfo[playerInfo$name == "mbrebocho", ]$joined <- as.Date("2019-07-24")
 
+playerInfo[playerInfo$name == "Rafael rosális", ]$joined <- as.Date("2019-07-28")
+playerInfo[playerInfo$name == "Vieira", ]$joined <- as.Date("2019-07-31")
+playerInfo[playerInfo$name == "atanas23", ]$joined <- as.Date("2019-07-31")
+playerInfo[playerInfo$tag == "#2P0U2L0P8", ]$joined <- as.Date("2019-07-28")
+
+
 
 
