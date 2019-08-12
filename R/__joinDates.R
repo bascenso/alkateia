@@ -134,6 +134,14 @@ playerInfo[playerInfo$name == "Vieira", ]$joined <- as.Date("2019-07-31")
 playerInfo[playerInfo$name == "atanas23", ]$joined <- as.Date("2019-07-31")
 playerInfo[playerInfo$tag == "#2P0U2L0P8", ]$joined <- as.Date("2019-07-28")
 
+playerInfo[playerInfo$tag == "#88L82CCLU", ]$joined <- as.Date("2019-08-07")
+playerInfo[playerInfo$name == "Raf1nha 7", ]$joined <- as.Date("2019-08-11")
+playerInfo[playerInfo$name == "ShadowGTi", ]$joined <- as.Date("2019-08-11")
+playerInfo[playerInfo$name == "ruben catotas", ]$joined <- as.Date("2019-08-10")
+playerInfo[playerInfo$name == "Falconeyes", ]$joined <- as.Date("2019-08-07")
+playerInfo[playerInfo$name == "Darroyce", ]$joined <- as.Date("2019-08-07")
+
+
 
 
 
