@@ -69,8 +69,8 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
             detailedMembersDF[detailedMembersDF$tag == newMembers[i, "tag"], ]$joined <- Sys.Date()
         }
     }
-    
-    # If any member changed its name, set the new name
+
+    # If any member changed his name, set the new name
     for (i in 1:nrow(detailedMembersDF)) {
         playerTag <- detailedMembersDF$tag[i]
         newname <- detailedMembersDF$name[i]

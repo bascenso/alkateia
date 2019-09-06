@@ -141,7 +141,14 @@ playerInfo[playerInfo$name == "ruben catotas", ]$joined <- as.Date("2019-08-10")
 playerInfo[playerInfo$name == "Falconeyes", ]$joined <- as.Date("2019-08-07")
 playerInfo[playerInfo$name == "Darroyce", ]$joined <- as.Date("2019-08-07")
 
+playerInfo[playerInfo$tag == "#GCQ2LQJ0", ]$joined <- as.Date("2019-08-14")
+playerInfo[playerInfo$name == "ptduarte20", ]$joined <- as.Date("2019-08-13")
+playerInfo[playerInfo$name == "DALHEVADER", ]$joined <- as.Date("2019-08-16")
+playerInfo[playerInfo$name == "Noob Clode", ]$joined <- as.Date("2019-08-11")
 
-
-
+playerInfo[playerInfo$name == "kao", ]$joined <- as.Date("2019-09-05")
+playerInfo[playerInfo$name == "changoloco1211", ]$joined <- as.Date("2019-09-02")
+playerInfo[playerInfo$name == "eurico7", ]$joined <- as.Date("2019-09-01")
+playerInfo[playerInfo$name == "Nuno1997", ]$joined <- as.Date("2019-08-31")
+playerInfo[playerInfo$name == "capitao coronel", ]$joined <- as.Date("2019-08-31")
 
