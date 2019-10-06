@@ -83,7 +83,7 @@ updateJoinDates <- function(detailedMembersDF, playerFile) {
 
     # Save the new data (name changes and new joins)
     saveRDS(playerInfo, playerFile)
-    
+
     #compute age as nr. days from joined date to today
     detailedMembersDF$age <- as.numeric(Sys.Date() - detailedMembersDF$joined)
     

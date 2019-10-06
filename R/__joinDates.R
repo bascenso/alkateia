@@ -154,3 +154,5 @@ playerInfo[playerInfo$name == "capitao coronel", ]$joined <- as.Date("2019-08-31
 
 playerInfo[playerInfo$tag == "#82J8RVRRU", ]$joined <- as.Date("2019-09-14")
 playerInfo[playerInfo$tag == "#PCYCPG89Q", ]$joined <- as.Date("2019-09-15")
+
+playerInfo[playerInfo$name == "Malukemachine", ]$joined <- as.Date("2019-09-24")
