@@ -164,9 +164,12 @@ playerInfo[playerInfo$name == "hp", ]$joined <- as.Date("2019-10-22")
 playerInfo[playerInfo$name == "João Duarte", ]$joined <- as.Date("2019-10-24")
 
 playerInfo[playerInfo$name == "_I_Will_REKT_U_", ]$joined <- as.Date("2019-11-03")
-playerInfo[playerInfo$name == "Cabé", ]$joined <- as.Date("2019-11-09")
+playerInfo[playerInfo$name == "Cabé", ]$joined <- as.Date("2019-11-07")
 playerInfo[playerInfo$name == "Gergerht8", ]$joined <- as.Date("2019-11-05")
 
+playerInfo[playerInfo$tag == "#8YCVGGG9Y", ]$joined <- as.Date("2019-11-13")
+playerInfo[playerInfo$tag == "#2LRUYLLP2", ]$joined <- as.Date("2019-11-10")
+playerInfo[playerInfo$tag == "#29J8VLRLP", ]$joined <- as.Date("2019-11-13")
 
 
 
