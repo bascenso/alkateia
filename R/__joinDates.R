@@ -199,3 +199,14 @@ playerInfo[playerInfo$name == "jäger", ]$joined <- as.Date("2019-12-15")
 playerInfo[playerInfo$name == "EM_DU_17", ]$joined <- as.Date("2019-12-11")
 
 
+playerInfo[playerInfo$name == "TOMMY", ]$joined <- as.Date("2019-12-19")
+playerInfo[playerInfo$tag == "#9GC9PG8YY", ]$joined <- as.Date("2019-12-20")
+playerInfo[playerInfo$name == "Helder", ]$joined <- as.Date("2019-12-18")
+playerInfo[playerInfo$name == "hooligan1904", ]$joined <- as.Date("2019-12-19")
+playerInfo[playerInfo$name == "rafapower", ]$joined <- as.Date("2019-12-19")
+playerInfo[playerInfo$name == "gui10alves", ]$joined <- as.Date("2019-12-18")
+playerInfo[playerInfo$name == "mLt", ]$joined <- as.Date("2019-12-22")
+playerInfo[playerInfo$name == "Rodrigo 200", ]$joined <- as.Date("2019-12-19")
+playerInfo[playerInfo$name == "jorge Miguel", ]$joined <- as.Date("2019-12-19")
+
+
