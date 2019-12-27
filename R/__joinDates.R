@@ -210,3 +210,6 @@ playerInfo[playerInfo$name == "Rodrigo 200", ]$joined <- as.Date("2019-12-19")
 playerInfo[playerInfo$name == "jorge Miguel", ]$joined <- as.Date("2019-12-19")
 
 
+playerInfo[playerInfo$name == "Roberth 2", ]$joined <- as.Date("2019-12-24")
+playerInfo[playerInfo$name == "PNL", ]$joined <- as.Date("2019-12-26")
+playerInfo[playerInfo$name == "Gongas", ]$joined <- as.Date("2019-12-23")
