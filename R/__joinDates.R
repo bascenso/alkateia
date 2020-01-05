@@ -214,7 +214,7 @@ playerInfo[playerInfo$name == "PNL", ]$joined <- as.Date("2019-12-26")
 playerInfo[playerInfo$name == "Gongas", ]$joined <- as.Date("2019-12-23")
 
 playerInfo[playerInfo$name == "SIDKON", ]$joined <- as.Date("2020-01-04")
-playerInfo[playerInfo$name == "Peixoto", ]$joined <- as.Date("2020-01-02")
+playerInfo[playerInfo$name == "Peixoto", ]$joined <- as.Date("2019-12-30")
 playerInfo[playerInfo$name == "SALVADOR46", ]$joined <- as.Date("2019-12-31")
 playerInfo[playerInfo$tag == "#2Q0JVYQ00", ]$joined <- as.Date("2019-12-31")
 
