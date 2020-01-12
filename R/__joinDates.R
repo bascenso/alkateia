@@ -218,5 +218,6 @@ playerInfo[playerInfo$name == "Peixoto", ]$joined <- as.Date("2019-12-30")
 playerInfo[playerInfo$name == "SALVADOR46", ]$joined <- as.Date("2019-12-31")
 playerInfo[playerInfo$tag == "#2Q0JVYQ00", ]$joined <- as.Date("2019-12-31")
 
+playerInfo[playerInfo$name == "dpf", ]$joined <- as.Date("2020-01-07")
 
 
