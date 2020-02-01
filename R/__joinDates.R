@@ -225,3 +225,9 @@ playerInfo[playerInfo$name == "PutoRider", ]$joined <- as.Date("2020-01-16")
 playerInfo[playerInfo$name == "lord", ]$joined <- as.Date("2020-01-14")
 playerInfo[playerInfo$tag == "#20P2GU0", ]$joined <- as.Date("2019-12-18")
 
+
+playerInfo[playerInfo$name == "Rafa", ]$joined <- as.Date("2020-01-24")
+playerInfo[playerInfo$name == "Filipe2002", ]$joined <- as.Date("2020-01-25")
+playerInfo[playerInfo$name == "Ribiti", ]$joined <- as.Date("2020-01-26")
+playerInfo[playerInfo$name == "jpmc amanda", ]$joined <- as.Date("2020-02-01")
+
