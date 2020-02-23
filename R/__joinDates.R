@@ -236,4 +236,6 @@ playerInfo[playerInfo$name == "fabiosantonn", ]$joined <- as.Date("2020-02-13")
 playerInfo[playerInfo$name == "Faufau@69", ]$joined <- as.Date("2020-02-04")
 playerInfo[playerInfo$name == "Pedro 11", ]$joined <- as.Date("2020-02-10")
 
+playerInfo[playerInfo$name == "Sequeira", ]$joined <- as.Date("2020-02-21")
+playerInfo[playerInfo$name == "Tronco", ]$joined <- as.Date("2020-02-22")
 
