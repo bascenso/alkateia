@@ -246,3 +246,10 @@ playerInfo[playerInfo$name == "Gabriel", ]$joined <- as.Date("2020-03-05")
 playerInfo[playerInfo$name == "John McClane", ]$joined <- as.Date("2020-02-26")
 playerInfo[playerInfo$name == "tiago22(2)", ]$joined <- as.Date("2020-02-24")
 playerInfo[playerInfo$name == "Your Mother xD", ]$joined <- as.Date("2020-03-05")
+
+playerInfo[playerInfo$name == "P3pp3R", ]$joined <- as.Date("2020-03-21")
+playerInfo[playerInfo$name == "Pipa", ]$joined <- as.Date("2020-03-18")
+playerInfo[playerInfo$name == "devilukas", ]$joined <- as.Date("2020-03-19")
+playerInfo[playerInfo$name == "master-baiteur", ]$joined <- as.Date("2020-03-21")
+
+
