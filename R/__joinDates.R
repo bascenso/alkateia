@@ -240,7 +240,7 @@ playerInfo[playerInfo$name == "Sequeira", ]$joined <- as.Date("2020-02-21")
 playerInfo[playerInfo$name == "Tronco", ]$joined <- as.Date("2020-02-22")
 
 playerInfo[playerInfo$tag == "#890CYLLU", ]$joined <- as.Date("2020-02-28") # Rafa 1
-playerInfo[playerInfo$tag == "#UYUCGQJY", ]$joined <- as.Date("2020-01-24") # Rafa 2
+playerInfo[playerInfo$tag == "#UYUCGQJY", ]$joined <- as.Date("2020-01-29") # Rafa 2
 
 playerInfo[playerInfo$name == "Gabriel", ]$joined <- as.Date("2020-03-05")
 playerInfo[playerInfo$name == "John McClane", ]$joined <- as.Date("2020-02-26")
@@ -252,4 +252,7 @@ playerInfo[playerInfo$name == "Pipa", ]$joined <- as.Date("2020-03-18")
 playerInfo[playerInfo$name == "devilukas", ]$joined <- as.Date("2020-03-19")
 playerInfo[playerInfo$name == "master-baiteur", ]$joined <- as.Date("2020-03-21")
 
+
+
+UYUCGQJY
 
