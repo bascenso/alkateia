@@ -253,6 +253,7 @@ playerInfo[playerInfo$name == "devilukas", ]$joined <- as.Date("2020-03-19")
 playerInfo[playerInfo$name == "master-baiteur", ]$joined <- as.Date("2020-03-21")
 
 
-
-UYUCGQJY
+playerInfo[playerInfo$name == "pentotal", ]$joined <- as.Date("2020-03-30")
+playerInfo[playerInfo$name == "FL GAMER 8", ]$joined <- as.Date("2020-03-30")
+playerInfo[playerInfo$name == "DACHA", ]$joined <- as.Date("2020-04-06")
 
