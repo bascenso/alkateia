@@ -225,7 +225,6 @@ playerInfo[playerInfo$name == "PutoRider", ]$joined <- as.Date("2020-01-16")
 playerInfo[playerInfo$name == "lord", ]$joined <- as.Date("2020-01-14")
 playerInfo[playerInfo$tag == "#20P2GU0", ]$joined <- as.Date("2019-12-18")
 
-
 playerInfo[playerInfo$name == "Rafa", ]$joined <- as.Date("2020-01-24")
 playerInfo[playerInfo$name == "Filipe2002", ]$joined <- as.Date("2020-01-25")
 playerInfo[playerInfo$name == "Ribiti", ]$joined <- as.Date("2020-01-26")
@@ -252,8 +251,10 @@ playerInfo[playerInfo$name == "Pipa", ]$joined <- as.Date("2020-03-18")
 playerInfo[playerInfo$name == "devilukas", ]$joined <- as.Date("2020-03-19")
 playerInfo[playerInfo$name == "master-baiteur", ]$joined <- as.Date("2020-03-21")
 
-
 playerInfo[playerInfo$name == "pentotal", ]$joined <- as.Date("2020-03-30")
 playerInfo[playerInfo$name == "FL GAMER 8", ]$joined <- as.Date("2020-03-30")
 playerInfo[playerInfo$name == "DACHA", ]$joined <- as.Date("2020-04-06")
 
+playerInfo[playerInfo$name == "paparata", ]$joined <- as.Date("2020-04-24")
+playerInfo[playerInfo$name == "proximacentauri", ]$joined <- as.Date("2020-04-17")
+playerInfo[playerInfo$name == "W4R SN0W", ]$joined <- as.Date("2020-04-12")
