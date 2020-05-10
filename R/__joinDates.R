@@ -258,3 +258,12 @@ playerInfo[playerInfo$name == "DACHA", ]$joined <- as.Date("2020-04-06")
 playerInfo[playerInfo$name == "paparata", ]$joined <- as.Date("2020-04-24")
 playerInfo[playerInfo$name == "proximacentauri", ]$joined <- as.Date("2020-04-17")
 playerInfo[playerInfo$name == "W4R SN0W", ]$joined <- as.Date("2020-04-12")
+
+playerInfo[playerInfo$name == "jcastanheira5", ]$joined <- as.Date("2020-05-06")
+playerInfo[playerInfo$name == "Gicasgamer", ]$joined <- as.Date("2020-05-08")
+playerInfo[playerInfo$name == "COSTA06", ]$joined <- as.Date("2020-05-04")
+playerInfo[playerInfo$name == "Jonny", ]$joined <- as.Date("2020-05-10")
+playerInfo[playerInfo$name == "Labaredas", ]$joined <- as.Date("2020-04-28")
+
+
+
