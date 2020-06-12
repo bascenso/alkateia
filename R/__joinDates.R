@@ -265,6 +265,13 @@ playerInfo[playerInfo$name == "COSTA06", ]$joined <- as.Date("2020-05-04")
 playerInfo[playerInfo$name == "Jonny", ]$joined <- as.Date("2020-05-10")
 playerInfo[playerInfo$name == "Labaredas", ]$joined <- as.Date("2020-04-28")
 
-
 playerInfo[playerInfo$name == "gonzo", ]$joined <- as.Date("2020-05-13")
+
+
+playerInfo[playerInfo$name == "Ferradura Braba", ]$joined <- as.Date("2020-06-11")
+playerInfo[playerInfo$name == "HelpUpapi", ]$joined <- as.Date("2020-05-28")
+playerInfo[playerInfo$name == "Cups", ]$joined <- as.Date("2020-05-22")
+playerInfo[playerInfo$name == ".manna.", ]$joined <- as.Date("2020-05-28")
+playerInfo[playerInfo$name == "Ra's Al Ghul", ]$joined <- as.Date("2020-05-24")
+
 
