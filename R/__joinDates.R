@@ -275,3 +275,8 @@ playerInfo[playerInfo$name == ".manna.", ]$joined <- as.Date("2020-05-28")
 playerInfo[playerInfo$name == "Ra's Al Ghul", ]$joined <- as.Date("2020-05-24")
 
 
+playerInfo[playerInfo$name == "TanKy", ]$joined <- as.Date("2020-06-27")
+playerInfo[playerInfo$name == "LongHairJohn", ]$joined <- as.Date("2020-07-03")
+playerInfo[playerInfo$name == "GONNALO", ]$joined <- as.Date("2020-06-29")
+playerInfo[playerInfo$name == "MikeTheMLGPro", ]$joined <- as.Date("2020-06-30")
+
