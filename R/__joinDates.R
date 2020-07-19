@@ -280,3 +280,8 @@ playerInfo[playerInfo$name == "LongHairJohn", ]$joined <- as.Date("2020-07-01")
 playerInfo[playerInfo$name == "GONNALO", ]$joined <- as.Date("2020-06-29")
 playerInfo[playerInfo$name == "MikeTheMLGPro", ]$joined <- as.Date("2020-06-30")
 
+
+playerInfo[playerInfo$name == "Família Morais", ]$joined <- as.Date("2020-07-18")
+playerInfo[playerInfo$name == "fyk polic", ]$joined <- as.Date("2020-07-14")
+playerInfo[playerInfo$name == "Nuno", ]$joined <- as.Date("2020-07-16")
+
