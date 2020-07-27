@@ -219,8 +219,8 @@ buildEvolutionMap <- function(cl, nperiod = 3, warsPerPeriod = 15) {
 ## - 20.000 cards collected (all time) - 1 point
 ##
 ## Score / points removed:
-## - Final battle misses: 10 * misses + 3 ^ misses - 1
-##                      0         12         28         56        120        292
+## - Final battle misses: 30 * misses + 2.5 ^ misses - 1
+##                      0         32         65         105        158        247       423
 ## - Collection battle misses: (1 + misses / 2) ^ 2 - 1
 ##                      0   1   3   5   8  11  15  19  24  29  35  41  48  55  63
 ## - War miss: (misses / 4) ^ 2
@@ -246,7 +246,7 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
                                      + (statsDF$wins[i] * 6)
                                      + (memberWarDayWins / 4)
                                      + (memberClanCardsCollected / 20000)
-                                     - (10 * statsDF$finalBattleMisses[i] + 3 ^ statsDF$finalBattleMisses[i] - 1)
+                                     - (30 * statsDF$finalBattleMisses[i] + 2.5 ^ statsDF$finalBattleMisses[i] - 1)
                                      - ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
                                      #- (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
