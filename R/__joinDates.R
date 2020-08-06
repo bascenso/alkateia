@@ -291,3 +291,5 @@ playerInfo[playerInfo$name == "Campis", ]$joined <- as.Date("2020-07-29")
 
 playerInfo[playerInfo$tag == "#2L2Q9JRQL", ]$joined <- as.Date("2020-08-01") # Tikinho
 
+playerInfo[playerInfo$name == "Rabanadas", ]$joined <- as.Date("2020-08-05")
+

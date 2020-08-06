@@ -3,7 +3,7 @@ suppressPackageStartupMessages(library(httr))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(jsonlite))
-suppressPackageStartupMessages(library(xlsx))
+#suppressPackageStartupMessages(library(xlsx))
 suppressPackageStartupMessages(library(reshape2))
 
 source("defs.R", encoding = "utf-8")
@@ -12,7 +12,11 @@ source("storage.R", encoding = "utf-8")
 source("maps.R", encoding = "utf-8")
 source("dump.R", encoding = "utf-8")
 
-setwd("c:/Drive/OneDrive/11.GitRepos/alkateia/R/")
+## Personal PC folder
+##setwd("c:/Drive/OneDrive/11.GitRepos/alkateia/R/")
+
+## Nokia PC folder
+## setwd("C:/Users/ascenso/OneDrive - Nokia/99.Repos/R")
 
 ## ===========================================================================================================
 ## Get clan data and build stats
