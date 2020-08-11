@@ -293,3 +293,14 @@ playerInfo[playerInfo$tag == "#2L2Q9JRQL", ]$joined <- as.Date("2020-08-01") # T
 
 playerInfo[playerInfo$name == "Rabanadas", ]$joined <- as.Date("2020-08-05")
 
+playerInfo[playerInfo$name == "ChicoBoss volto", ]$joined <- as.Date("2020-08-09")
+playerInfo[playerInfo$name == "Pedrovski18", ]$joined <- as.Date("2020-08-10")
+
+
+
+# Read player file and store it again (after modifications)
+playerInfo <- readRDS(playerFile)
+
+saveRDS(playerInfo, playerFile)
+
+

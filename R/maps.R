@@ -79,8 +79,9 @@ buildWarStats <- function(cl, nwars = "all") {
     statsDF$collectionBattleMisses <- (statsDF$warsEntered * 3) - statsDF$collectionDayBattlesPlayed
 
     
-    ## Add win percentage
+    ## Add win percentage and cards per war
     statsDF$winRate <- round(statsDF$wins / statsDF$battlesPlayed, 2) * 100
+    statsDF$cardsPerWar <- round(statsDF$cardsEarned / statsDF$warsEntered, 0)
     
     ## Add flag for current members
     statsDF$currentMember <- rep("No", nrow(statsDF))
@@ -95,7 +96,8 @@ buildWarStats <- function(cl, nwars = "all") {
     statsDF <- computeRecentWarPresence(statsDF, cl)
 
     # Reorder columns and sort by WARSCORE
-    statsDF <- statsDF[c(1, 6, 11, 7, 13, 5, 2:4, 9, 8, 10, 12)]
+    statsDF <- statsDF[c(1, 6, 12, 7, 14, 5, 2:4, 9, 8, 10, 11, 13)]
+    #statsDF <- statsDF[c(1, 6, 11, 7, 13, 5, 2:4, 9, 8, 10, 12)]
     statsDF <- statsDF[order(desc(statsDF$WARSCORE)), ]
 
     statsDF

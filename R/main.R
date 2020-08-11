@@ -120,7 +120,7 @@ result <- dumpTables(list(clan$warStats[(clan$warStats$currentMember == "Yes"), 
                      c("warstats", "memberstats", "warmap"), dataPath)
 
 
-## Merge all player stats (war and individual), and save to XLXS file
+## Merge all player stats (war and individual), and save to XLSX file
 allStatsDF <- merge(clan$warStats, clan$memberInfo, by.x = "tag", by.y = "tag", all.x = TRUE)
 allStatsDF <- allStatsDF[, !names(allStatsDF) %in% c("name.y")]
 allStatsDF <- allStatsDF[order(desc(allStatsDF$WARSCORE)), ]
