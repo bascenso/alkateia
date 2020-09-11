@@ -26,11 +26,10 @@ myplayertag <- "/%232UVYQPG2J"
 myclantag <- "/%23PG8VC9V"
 
 
-tplayertag <- "/%23992V0CV2U"
-
 ## Files
 dataPath <- "../docs/data"
 warlogFile <- "data/warlog.RDS"
+riverRaceLogFile <- "data/riverRaceLog.RDS"
 clanStatsFile <- "data/clanstats.RDS"
 playerFile <- "data/players.RDS"
 

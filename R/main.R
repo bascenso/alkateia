@@ -28,7 +28,9 @@ clan <- list(tag = myclantag, name = "Alkateia PT")
 
 clan$members <- getClanMembers(clan$tag, token)
 clan$memberInfo <- getClanMemberDetails(clan$members$tag, token)
-clan$warlog <- getClanWarlog(clan$tag, token, warlogFile)
+#clan$warlog <- getClanWarlog(clan$tag, token, warlogFile)
+clan$warlog <- readRDS(warlogFile)
+clan$riverRaceLog <- getClanRiverRaceLog(clan$tag, token, riverRaceLogFile)
 clan$lastupdate <- Sys.time()
 
 clan$memberInfo <- updateJoinDates(clan$memberInfo, playerFile)
@@ -36,7 +38,7 @@ clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 
 
 ## War stats
-cat("Building stats... ")
+cat("Building war stats... ")
 
 clan$warStats <- buildWarStats(clan, nwars = 75)
 
@@ -46,50 +48,13 @@ warParticipationDF <- buildWarMap(clan, nwars = 75)
 ## Performance evolution map
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 
+## RiverRace Stats
+cat("Building river race stats... ")
+
+clan$riverRaceStats <- buildRiverRaceStats(clan)
+
 cat("OK\n")
 
-# ============================================================================================================
-# NEW CODE
-.__exclude <- function() {
-
-    clan$tables <- list()
-    clan$tables[[1]] <- prepareWarstatsTable(clan)
-    names(clan$tables) <- "warstats"
-    
-    
-    prepareWarstatsTable <- function(cl) {
-        
-        removeCols <- c("tag", "currentMember")
-        nwars <- max(cl$warStats$warsEntered)
-        
-        theTable <- cl$warStats[cl$warStats$currentMember == "Yes", !(names(cl$warStats) %in% removeCols)]
-        
-        theTable$pctStatus <- rep("HIGH", nrow(theTable))
-        theTable[theTable$pctLastPeriod < 80, "pctStatus"] <- "MEDIUM"
-        theTable[theTable$pctLastPeriod < 45, "pctStatus"] <- "LOW"
-        
-        for (i in 1:nrow(theTable)) {
-            theTable$imgPct[i] <- switch(theTable$pctStatus[i],
-                                         HIGH = "img/high.png",
-                                         MEDIUM = "img/med.png",
-                                         LOW = "img/low.png")
-        }
-        
-        
-        theTable$scoreStatus <- rep("GREAT", nrow(theTable))
-        theTable[theTable$WARSCORE < 7.5 * nwars, "scoreStatus"] <- "HIGH"
-        theTable[theTable$WARSCORE < 5 * nwars, "scoreStatus"] <- "MEDIUM"
-        theTable[theTable$WARSCORE < 2.5 * nwars, "scoreStatus"] <- "LOW"
-        theTable[theTable$WARSCORE < 0, "scoreStatus"] <- "DANGER"
-        
-        theTable$imgScore <- rep ("", nrow(theTable))
-        for (i in 1:nrow(theTable)) {
-            theTable$imgScore <- NULL
-        }
-    }
-
-}
-# END NEW CODE
 
 
 ## ===========================================================================================================
@@ -110,7 +75,6 @@ result <- dumpHTMLFile(
 )
 
 result <- storeLastUpdate(clan, dataPath)
-
 
 
 ## Dump tables to file

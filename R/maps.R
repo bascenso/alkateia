@@ -97,7 +97,6 @@ buildWarStats <- function(cl, nwars = "all") {
 
     # Reorder columns and sort by WARSCORE
     statsDF <- statsDF[c(1, 6, 12, 7, 14, 5, 2:4, 9, 8, 10, 11, 13)]
-    #statsDF <- statsDF[c(1, 6, 11, 7, 13, 5, 2:4, 9, 8, 10, 12)]
     statsDF <- statsDF[order(desc(statsDF$WARSCORE)), ]
 
     statsDF
@@ -215,10 +214,10 @@ buildEvolutionMap <- function(cl, nperiod = 3, warsPerPeriod = 15) {
 ##
 ## ================ PLAYER SCORE FORMULA:
 ## Score / points added:
-## - 500 cards earned = 1 point
-## - 1 war day victory = 6 points
-## - 3 war day victory (all time) - 1 point
-## - 20.000 cards collected (all time) - 1 point
+## - 5 cards earned = 1 point
+## - 1 war day victory = 600 points
+## - 1 war day victory (all time) - 30 points
+## - 5000 cards collected (all time) - 1 point
 ##
 ## Score / points removed:
 ## - Final battle misses: 30 * misses + 2.5 ^ misses - 1
@@ -244,12 +243,12 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
         memberMaxWars <- as.numeric(round((Sys.Date() - detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$joined) / 2))
         maxWars <- ifelse(memberMaxWars > totalWars, totalWars, memberMaxWars)
         
-        statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 500 
-                                     + (statsDF$wins[i] * 6)
-                                     + (memberWarDayWins / 3)
-                                     + (memberClanCardsCollected / 20000)
-                                     - (30 * statsDF$finalBattleMisses[i] + 2.5 ^ statsDF$finalBattleMisses[i] - 1)
-                                     - ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
+        statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 5
+                                     + (statsDF$wins[i] * 600)
+                                     + (memberWarDayWins * 30)
+                                     + (memberClanCardsCollected / 5000)
+                                     - 10 * (30 * statsDF$finalBattleMisses[i] + 2.5 ^ statsDF$finalBattleMisses[i] - 1)
+                                     - 10 * ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
                                      #- (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
     }
@@ -350,3 +349,79 @@ buildWarMap <- function(cl, nwars = "all") {
     warParticipationDF[order(warParticipationDF$name), ]
 
 }
+
+
+#' function buildRiverRaceStats - builds a data frame with the stats from the River Race
+#' 
+#' @param cl a clan data structure
+#' @return the DF with the stats
+#' 
+
+buildRiverRaceStats <- function(cl) {
+
+# Data frame columns:
+# name - player name
+# riverRacesEntered - number of river races where the player participated
+# pctParticipation
+# pctLastMonthParticipation
+# totalFame
+# totalRepairPoints
+# famePerWar
+    
+    races <- cl$riverRaceLog     
+    raceCount <- length(unique(races$riverRaceId))
+
+    s <- split(races, races$participantTag)
+    raceStatsDF <- data.frame(t(data.frame(lapply(s, function(x) {
+        colSums(x[, c("participantFame", "participantRepairPoints")])
+    } ))))
+
+    setnames(raceStatsDF, "participantFame", "totalFame")
+    setnames(raceStatsDF, "participantRepairPoints", "totalRepairPoints")
+    
+    
+    # Add tag and name
+    raceStatsDF$tag <- sub("X.", "#", rownames(raceStatsDF))
+    
+    raceStatsDF$name <- rep(NA, nrow(raceStatsDF))
+    
+    # Match first the names in the members DF to ensure current names
+    for (i in 1:nrow(raceStatsDF)) {
+        player <- as.character(raceStatsDF$tag[i])
+        occ <- match(player, cl$members$tag)
+        raceStatsDF$name[i] <- as.character(cl$members$name[occ])
+    }
+    
+    # For players not in the clan, match their name in the river race log
+    for (i in 1:nrow(raceStatsDF)) {
+        if (is.na(raceStatsDF$name[i])) {
+            player <- as.character(raceStatsDF$tag[i])
+            occ <- match(player, races$participantTag)
+            raceStatsDF$name[i] <- as.character(races$participantName[occ])
+        }
+    }
+    
+
+    # Add number of river races where the member was in the clan
+    participations <- data.frame(table(unlist(races$participantTag)))
+    raceStatsDF <- merge(raceStatsDF, participations, by.x = "tag", by.y = "Var1", all = TRUE)
+    setnames(raceStatsDF, "Freq", "riverRacesPresent")
+
+    # Add number of river races where the member has points > 0
+    racesEntered <- data.frame(table(unlist(races[(races$participantFame > 0) | (races$participantRepairPoints > 0), ]$participantTag)))
+    raceStatsDF <- merge(raceStatsDF, racesEntered, by.x = "tag", by.y = "Var1", all = TRUE)
+    setnames(raceStatsDF, "Freq", "riverRacesEntered")
+
+    # Add average points per race
+    raceStatsDF$pointsPerRace <- (raceStatsDF$totalFame + raceStatsDF$totalRepairPoints) / raceStatsDF$riverRacesEntered 
+    raceStatsDF$pctParticipation <- (raceStatsDF$riverRacesEntered / raceStatsDF$riverRacesPresent) * 100.0
+    
+    # Reorder columns and sort by Fame points
+    raceStatsDF <- raceStatsDF[c(1, 4, 5, 6, 2, 3, 7, 8)]
+    raceStatsDF <- raceStatsDF[order(desc(raceStatsDF$totalFame)), ]
+    
+    
+    raceStatsDF   
+}
+
+

@@ -29,6 +29,10 @@ memberpath <- "/members"
 warlogpath <- "/warlog"
 currentwarpath <- "/currentwar"
 
+## Clan wars v2 data
+riverracelogpath <- "/riverracelog"
+currentriverracepath <- "/currentriverrace"
+
 
 
 ## ===========================================================================================================
@@ -205,3 +209,71 @@ getClanMemberDetails <- function(members, token) {
     
     memberInfoDF
 }
+
+
+
+## ===========================================================================================================
+## Function getClanRiverRaceLog(clanTag, token, fileName)
+##      clanTag - the tag of the clan
+##      token - auth token
+##      fileName - if specified, append river race log data to this file (RDS format)
+
+getClanRiverRaceLog <- function (clanTag, token, fileName = "") {
+    
+    cat("Getting River race log for", clanTag, "... ")
+    
+    APIURL <- paste(APIEndpoint, clanpath, clanTag, riverracelogpath, sep = "")
+    
+    riverRaceLogReq <- GET(APIURL, add_headers(Accept = "application/json", Authorization = paste("Bearer", token)))
+    
+    if (riverRaceLogReq$status_code != 200) {
+        stop(paste("Server returned error:", riverRaceLogReq$status_code))
+        
+    } else {
+        riverRaceLogInfo <- content(riverRaceLogReq)
+        
+        if (file.exists(fileName)) {
+            riverRaceLogDF <- readRDS(fileName) # if there is already data present, load it
+        } else {
+            riverRaceLogDF <- data.frame() # else build the DF from scratch
+        }
+        
+        
+        for (i in 1:length(riverRaceLogInfo$items)) { # For each river race returned
+            thisRiverRaceId <- riverRaceLogInfo$items[[i]]$createdDate
+            
+            if (any(thisRiverRaceId == riverRaceLogDF$riverRaceId)) next # If data about the river race is already present, skip it
+            
+            # Iterate river race standings to find the clan
+            for (j in 1:5) {
+                if (riverRaceLogInfo$items[[i]]$standings[[j]]$clan$tag == sub("/%23", "#", clanTag)) break
+            }                
+            
+            # Get the data for each participant in the river race
+            for (k in 1:length(riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants)) {
+            
+                riverRaceLogDF <- rbind(riverRaceLogDF, data.frame(
+                    riverRaceId = thisRiverRaceId,
+                    riverRaceDate = strptime(thisRiverRaceId, "%Y%m%dT%H%M%S.000Z"),
+                    riverRaceFinish = strptime(riverRaceLogInfo$items[[i]]$standings[[j]]$clan$finishTime, "%Y%m%dT%H%M%S.000Z"),
+                    fame = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$fame,
+                    repairPoints = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$repairPoints,
+                    clanScore = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$clanScore,
+                    participantTag = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants[[k]]$tag,
+                    participantName = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants[[k]]$name,
+                    participantFame = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants[[k]]$fame,
+                    participantRepairPoints = riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants[[k]]$repairPoints
+                ))
+                
+            }
+            
+        }
+        
+        if (fileName != "") saveRDS(riverRaceLogDF, fileName)
+    }
+    
+    cat("OK\n")
+    
+    riverRaceLogDF
+}
+
