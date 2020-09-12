@@ -69,7 +69,7 @@ clanCols <- list(
     c("warDayWins", "Vitórias em guerras"),
     c("clanCardsCollected", "Cartas colectadas"),
     c("arena", "Arena"),
-    c("WARSCORE", "Contributo para o clã"),
+    c("WARSCORE", "Pontuação de guerra"),
     c("joined", "Data entrada"), 
     c("age", "Dias no clã"),
     c("winsP1", "Vitórias - 1 mês"),
@@ -83,7 +83,14 @@ clanCols <- list(
     c("rankP3", "Posição - 3 meses"),
     c("allWins", "Vitórias - total"),
     c("allScore", "Contributo - total"),
-    c("allRank", "Posição - total")
+    c("allRank", "Posição - total"),
+    c("riverRacesPresent", "Oportunidades"),
+    c("riverRacesEntered", "Participações"),
+    c("totalFame", "Fama ganha"),
+    c("totalRepairPoints", "Pontos de Reparação"),
+    c("pointsPerRace", "Média de fama"),
+    c("pctParticipation", "Percentagem de participação"),
+    c("totalWarScore", "Pontuação total de guerra")
 )
 
 

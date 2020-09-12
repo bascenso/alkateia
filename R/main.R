@@ -53,6 +53,16 @@ cat("Building river race stats... ")
 
 clan$riverRaceStats <- buildRiverRaceStats(clan)
 
+# Combine score for cw1 + cw2
+clan$riverRaceStats$totalWarScore <- clan$riverRaceStats$totalFame + clan$riverRaceStats$totalRepairPoints
+
+for (i in 1:nrow(clan$riverRaceStats)) {
+    clan$riverRaceStats[i, ]$totalWarScore <- clan$riverRaceStats[i, ]$totalWarScore + clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]$WARSCORE
+}
+
+clan$riverRaceStats <- clan$riverRaceStats[order(desc(clan$riverRaceStats$totalWarScore)), ]
+
+
 cat("OK\n")
 
 
@@ -63,14 +73,15 @@ cat("OK\n")
 cat("Generating files... ")
 
 result <- dumpHTMLFile(
-        c("warStats", "playerStats", "warMap", "playerEvolution"),
+        c("warStats", "playerStats", "warMap", "playerEvolution", "riverRaceStats"),
         list(
             clan$warStats[(clan$warStats$currentMember == "Yes"), !(names(clan$warStats) %in% c("tag", "currentMember"))], 
             clan$memberInfo, 
             warParticipationDF[, names(warParticipationDF) != "tag"],
-            evolutionDF[, names(evolutionDF) != "tag"]
+            evolutionDF[, names(evolutionDF) != "tag"],
+            clan$riverRaceStats
         ),
-        c(FALSE, FALSE, TRUE, FALSE),
+        useImages = c(FALSE, FALSE, TRUE, FALSE, FALSE),
         dataPath
 )
 

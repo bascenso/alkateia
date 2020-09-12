@@ -1,9 +1,19 @@
 $(function(){
-    $("div#lastUpdate").load("data/lastupdate.html")
+    $("div#lastUpdate").load("data/lastupdate.html");
+    $("div#riverRaceStatsTable").load("data/riverracestats.html", sortRiverRaceStats);
     $("div#warStatsTable").load("data/warstats.html", sortWarStats);
     $("div#playerStatsTable").load("data/playerstats.html", sortPlayerStats);
     $("div#warMapTable").load("data/warmap.html", sortWarMap);
     $("div#playerEvolutionTable").load("data/playerevolution.html", sortPlayerEvolution);
+
+    function sortRiverRaceStats() {
+        $('#riverRaceStats').tablesorter({
+            sortInitialOrder: "desc",
+            widgets: ['zebra'],
+            widgetZebra: { css: ['odd', 'even' ] }
+        }); 
+    }
+
 
     function sortWarStats() {
         $('#warStats').tablesorter({
