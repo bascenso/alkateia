@@ -135,7 +135,7 @@ h5 {
 }
 
 /* Table container styles */
-#warStatsTable, #playerStatsTable, #warMapTable, #playerEvolutionTable {
+#warStatsTable, #riverRaceStatsTable, #playerStatsTable, #warMapTable, #playerEvolutionTable {
   border-radius: 8px;
   display: block;
   margin-top: 5px;
@@ -152,19 +152,19 @@ h5 {
   overflow-x: auto;
 }
 
-#warStats, #playerStats, #warMap, #playerEvolution {
+#warStats, #riverRaceStats, #playerStats, #warMap, #playerEvolution {
   margin: 1 auto;
   font-size: 1.0em;
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
-#warStats thead, #playerStats thead, #warMap thead, #playerEvolution thead {
+#warStats thead, #riverRaceStats thead, #playerStats thead, #warMap thead, #playerEvolution thead {
   cursor: pointer;
 }
 
 
-#warStats thead tr th, #playerStats thead tr th, #warMap thead tr th, #playerEvolution thead tr th { 
+#warStats thead tr th, #riverRaceStats thead tr th, #playerStats thead tr th, #warMap thead tr th, #playerEvolution thead tr th { 
   font-weight: bold;
   font-size: 1.0em;
   vertical-align: middle;
@@ -177,6 +177,7 @@ h5 {
 
 
 #warStats thead tr th.headerSortUp, #warStats thead tr th.headerSortDown,
+#riverRaceStats thead tr th.headerSortUp, #riverRaceStats thead tr th.headerSortDown,
 #playerStats thead tr th.headerSortUp, #playerStats thead tr th.headerSortDown,
 #warMap thead tr th.headerSortUp, #warMap thead tr th.headerSortDown,
 #playerEvolution thead tr th.headerSortUp, #playerEvolution thead tr th.headerSortDown 
@@ -185,40 +186,47 @@ h5 {
   background: #3f51df;
 }
 
-#warStats thead tr th.headerSortUp span, #playerStats thead tr th.headerSortUp span,
+#warStats thead tr th.headerSortUp span, #riverRaceStats thead tr th.headerSortUp span,
+#playerStats thead tr th.headerSortUp span,
 #warMap thead tr th.headerSortUp span, #playerEvolution thead tr th.headerSortUp span {
   background-image: url('img/uparrow.png') right center no-repeat;
   padding-right: 0px;
 }
 
-#warStats thead tr th.headerSortDown span, #playerStats thead tr th.headerSortDown span,
+#warStats thead tr th.headerSortDown span, #riverRaceStats thead tr th.headerSortDown span,
+#playerStats thead tr th.headerSortDown span,
 #warMap thead tr th.headerSortDown span, #playerEvolution thead tr th.headerSortDown span {
   background-image: url('img/downarrow.png') right center no-repeat;
   padding-right: 0px;
 }
 
-#warStats tbody tr.even, #playerStats tbody tr.even, #warMap tbody tr.even, #playerEvolution tbody tr.even { 
+#warStats tbody tr.even, #riverRaceStats tbody tr.even, 
+#playerStats tbody tr.even, #warMap tbody tr.even, #playerEvolution tbody tr.even { 
   color: #8695b0;
   background: #fff;
   padding-top: 3px;
   padding-bottom: 3px;
 }
 
-#warStats tbody tr.odd, #playerStats tbody tr.odd, #warMap tbody tr.odd, #playerEvolution tbody tr.odd {
+#warStats tbody tr.odd, #riverRaceStats tbody tr.odd,
+#playerStats tbody tr.odd, #warMap tbody tr.odd, #playerEvolution tbody tr.odd {
   color: #8695b0;
   background: #f8f6ff;
 }
 
-#warStats tbody tr:hover, #playerStats tbody tr:hover, #warMap tbody tr:hover, #playerEvolution tbody tr:hover {
+#warStats tbody tr:hover, #riverRaceStats tbody tr:hover,
+#playerStats tbody tr:hover, #warMap tbody tr:hover, #playerEvolution tbody tr:hover {
   background: #dee9f1;
 }
 
-#warStats tbody tr td, #playerStats tbody tr td, #warMap tbody tr td, #playerEvolution tbody tr td {
+#warStats tbody tr td, #riverRaceStats tbody tr td,
+#playerStats tbody tr td, #warMap tbody tr td, #playerEvolution tbody tr td {
   text-align: center;
   padding: 15px 8px;
 }
 
-#warStats tbody tr td.lalign, #playerStats tbody tr td.lalign, #warMap tbody tr td.lalign, #playerEvolution tbody tr td.lalign {
+#warStats tbody tr td.lalign, #riverRaceStats tbody tr td.lalign,
+#playerStats tbody tr td.lalign, #warMap tbody tr td.lalign, #playerEvolution tbody tr td.lalign {
   font-weight: bold;
   text-align: left;
 }

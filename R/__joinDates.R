@@ -304,6 +304,7 @@ playerInfo[playerInfo$name == "SR. M4RQU3$", ]$joined <- as.Date("2020-09-03")
 playerInfo[playerInfo$name == "Momothegreat", ]$joined <- as.Date("2020-09-04")
 playerInfo[playerInfo$name == "David15", ]$joined <- as.Date("2020-09-05")
 
+playerInfo[playerInfo$name == "Hex", ]$joined <- as.Date("2020-09-13")
 
 
 # Read player file and store it again (after modifications)
