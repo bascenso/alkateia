@@ -220,10 +220,10 @@ buildEvolutionMap <- function(cl, nperiod = 3, warsPerPeriod = 15) {
 ## - 5000 cards collected (all time) - 1 point
 ##
 ## Score / points removed:
-## - Final battle misses: 30 * misses + 2.5 ^ misses - 1
-##                      0         32         65         105        158        247       423
-## - Collection battle misses: (1 + misses / 2) ^ 2 - 1
-##                      0   1   3   5   8  11  15  19  24  29  35  41  48  55  63
+## - Final battle misses: 1000 * 2 ^ (misses - 1) - 500
+##                      0         500         1500         3500        7500        15500       31500    63500
+## - Collection battle misses: 1000 * 2 ^ (misses / 4) - 1000
+##                      0   189  414  681  1000  1378  1828  2363  3000  3756  4656  5727  7000
 ## - War miss: (misses / 4) ^ 2
 ##                      0, 0.1, 0.3, 0.6, 1, 1.6
 
@@ -243,12 +243,12 @@ computePlayerScore <- function(statsDF, detailedMembersDF, totalWars) {
         memberMaxWars <- as.numeric(round((Sys.Date() - detailedMembersDF[detailedMembersDF$tag == statsDF[i, ]$tag, ]$joined) / 2))
         maxWars <- ifelse(memberMaxWars > totalWars, totalWars, memberMaxWars)
         
-        statsDF$WARSCORE[i] <- round(statsDF$cardsEarned[i] / 10
+        statsDF$WARSCORE[i] <- round((statsDF$cardsEarned[i] / 10)
                                      + (statsDF$wins[i] * 800)
                                      + (memberWarDayWins * 30)
                                      + (memberClanCardsCollected / 5000)
-                                     - 10 * (30 * statsDF$finalBattleMisses[i] + 2.5 ^ statsDF$finalBattleMisses[i] - 1)
-                                     - 10 * ((1 + statsDF$collectionBattleMisses[i] / 2) ^ 2 - 1)
+                                     - (1000 * 2 ^ (statsDF$finalBattleMisses[i] - 1) - 500)
+                                     - (1000 * 2 ^ (statsDF$collectionBattleMisses[i] / 4) - 1000)
                                      #- (((maxWars - statsDF$warsEntered[i]) / 4) ^ 2)
         )
     }
@@ -413,8 +413,8 @@ buildRiverRaceStats <- function(cl) {
     setnames(raceStatsDF, "Freq", "riverRacesEntered")
 
     # Add average points per race
-    raceStatsDF$pointsPerRace <- (raceStatsDF$totalFame + raceStatsDF$totalRepairPoints) / raceStatsDF$riverRacesEntered 
-    raceStatsDF$pctParticipation <- (raceStatsDF$riverRacesEntered / raceStatsDF$riverRacesPresent) * 100.0
+    raceStatsDF$pointsPerRace <- round((raceStatsDF$totalFame + raceStatsDF$totalRepairPoints) / raceStatsDF$riverRacesEntered)
+    raceStatsDF$pctParticipation <- round((raceStatsDF$riverRacesEntered / raceStatsDF$riverRacesPresent) * 100.0)
     
     # Reorder columns and sort by Fame points
     raceStatsDF <- raceStatsDF[c(1, 4, 5, 6, 2, 3, 7, 8)]

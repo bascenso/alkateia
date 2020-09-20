@@ -48,6 +48,8 @@ warParticipationDF <- buildWarMap(clan, nwars = 65)
 ## Performance evolution map
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
 
+cat("OK\n")
+
 ## RiverRace Stats
 cat("Building river race stats... ")
 
@@ -57,7 +59,8 @@ clan$riverRaceStats <- buildRiverRaceStats(clan)
 clan$riverRaceStats$totalWarScore <- clan$riverRaceStats$totalFame + clan$riverRaceStats$totalRepairPoints
 
 for (i in 1:nrow(clan$riverRaceStats)) {
-    clan$riverRaceStats[i, ]$totalWarScore <- clan$riverRaceStats[i, ]$totalWarScore + clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]$WARSCORE
+    if (nrow(clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]) > 0)
+        clan$riverRaceStats[i, ]$totalWarScore <- clan$riverRaceStats[i, ]$totalWarScore + clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]$WARSCORE
 }
 
 clan$riverRaceStats <- clan$riverRaceStats[order(desc(clan$riverRaceStats$totalWarScore)), ]
