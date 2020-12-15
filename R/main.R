@@ -15,7 +15,7 @@ source("dump.R", encoding = "utf-8")
 ## PC 1 folder
 ##setwd("c:/Drive/OneDrive/11.GitRepos/alkateia/R/")
 
-## PC 2 folder
+## PC 2 folder (THIS ONE)
 ## setwd("C:/Users/basce/Documents/Repos/alkateia/R")
 
 ## ===========================================================================================================
@@ -40,10 +40,10 @@ clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 ## War stats
 cat("Building war stats... ")
 
-clan$warStats <- buildWarStats(clan, nwars = 50)
+clan$warStats <- buildWarStats(clan, nwars = 30)
 
 ## War participation map
-warParticipationDF <- buildWarMap(clan, nwars = 50)
+warParticipationDF <- buildWarMap(clan, nwars = 30)
 
 ## Performance evolution map
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
