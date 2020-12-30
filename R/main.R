@@ -16,7 +16,7 @@ source("dump.R", encoding = "utf-8")
 ##setwd("c:/Drive/OneDrive/11.GitRepos/alkateia/R/")
 
 ## PC 2 folder (THIS ONE)
-## setwd("C:/Users/basce/Documents/Repos/alkateia/R")
+setwd("C:/Users/basce/Documents/Repos/alkateia/R")
 
 ## ===========================================================================================================
 ## Get clan data and build stats
