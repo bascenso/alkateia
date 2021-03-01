@@ -249,6 +249,9 @@ getClanRiverRaceLog <- function (clanTag, token, fileName = "") {
                 if (riverRaceLogInfo$items[[i]]$standings[[j]]$clan$tag == sub("/%23", "#", clanTag)) break
             }                
             
+            # Bug in the river race log, where player tags and names are not displayed. Skip that river race
+            if (riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants[[1]]$tag == "#0") next
+            
             # Get the data for each participant in the river race
             for (k in 1:length(riverRaceLogInfo$items[[i]]$standings[[j]]$clan$participants)) {
             

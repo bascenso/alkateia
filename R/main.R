@@ -40,10 +40,10 @@ clan$stats <- logClanStats(clan$memberInfo, clanStatsFile)
 ## War stats
 cat("Building war stats... ")
 
-clan$warStats <- buildWarStats(clan, nwars = 15)
+clan$warStats <- buildWarStats(clan, nwars = 50)
 
 ## War participation map
-warParticipationDF <- buildWarMap(clan, nwars = 15)
+warParticipationDF <- buildWarMap(clan, nwars = 50)
 
 ## Performance evolution map
 evolutionDF <- buildEvolutionMap(clan, nperiod = 3, warsPerPeriod = 15)
@@ -55,15 +55,15 @@ cat("Building river race stats... ")
 
 clan$riverRaceStats <- buildRiverRaceStats(clan)
 
-# Combine score for cw1 + cw2
 clan$riverRaceStats$totalWarScore <- clan$riverRaceStats$totalFame + clan$riverRaceStats$totalRepairPoints
-
-for (i in 1:nrow(clan$riverRaceStats)) {
-    if (nrow(clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]) > 0)
-        clan$riverRaceStats[i, ]$totalWarScore <- clan$riverRaceStats[i, ]$totalWarScore + clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]$WARSCORE
-}
-
 clan$riverRaceStats <- clan$riverRaceStats[order(desc(clan$riverRaceStats$totalWarScore)), ]
+
+# Combine score for cw1 + cw2
+# Not used anymore
+#for (i in 1:nrow(clan$riverRaceStats)) {
+#    if (nrow(clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]) > 0)
+#        clan$riverRaceStats[i, ]$totalWarScore <- clan$riverRaceStats[i, ]$totalWarScore + clan$warStats[clan$warStats$tag == clan$riverRaceStats[i, ]$tag, ]$WARSCORE
+#}
 
 
 cat("OK\n")
