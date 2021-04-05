@@ -354,10 +354,11 @@ buildWarMap <- function(cl, nwars = "all") {
 #' function buildRiverRaceStats - builds a data frame with the stats from the River Race
 #' 
 #' @param cl a clan data structure
+#' @param nraces number of wars to use in the stats (default = all)
 #' @return the DF with the stats
 #' 
 
-buildRiverRaceStats <- function(cl) {
+buildRiverRaceStats <- function(cl, nraces = "all") {
 
 # Data frame columns:
 # name - player name
@@ -370,7 +371,26 @@ buildRiverRaceStats <- function(cl) {
     
     races <- cl$riverRaceLog     
     raceCount <- length(unique(races$riverRaceId))
+    
+    if (nraces == "all") nraces <- raceCount
+    
+    if (nraces <= 0 || nraces > raceCount) {
+        warning("Invalid number of wars. Defaulting to 'all'.")
+        nraces <- raceCount
+    }
 
+    if (nraces < raceCount) {
+        # PENDING: Subset races to include only the most recent nraces
+        
+        # Get nraces most recent dates
+        raceDates <- unique(races$riverRaceId)
+        raceDates <- raceDates[order(unique(races$riverRaceFinish), decreasing = TRUE)]
+        raceDates <- raceDates[1:nraces]        
+
+        # subset the most recent races
+        races <- races[races$riverRaceId %in% raceDates, ]
+    }
+    
     s <- split(races, races$participantTag)
     raceStatsDF <- data.frame(t(data.frame(lapply(s, function(x) {
         colSums(x[, c("participantFame", "participantRepairPoints")])

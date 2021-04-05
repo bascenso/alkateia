@@ -53,7 +53,7 @@ cat("OK\n")
 ## RiverRace Stats
 cat("Building river race stats... ")
 
-clan$riverRaceStats <- buildRiverRaceStats(clan)
+clan$riverRaceStats <- buildRiverRaceStats(clan, nraces = 20)
 
 clan$riverRaceStats$totalWarScore <- clan$riverRaceStats$totalFame + clan$riverRaceStats$totalRepairPoints
 clan$riverRaceStats <- clan$riverRaceStats[order(desc(clan$riverRaceStats$totalWarScore)), ]
