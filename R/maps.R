@@ -384,7 +384,7 @@ buildRiverRaceStats <- function(cl, nraces = "all") {
         
         # Get nraces most recent dates
         raceDates <- unique(races$riverRaceId)
-        raceDates <- raceDates[order(unique(races$riverRaceFinish), decreasing = TRUE)]
+        raceDates <- raceDates[order(unique(races$riverRaceDate), decreasing = TRUE)]
         raceDates <- raceDates[1:nraces]        
 
         # subset the most recent races
